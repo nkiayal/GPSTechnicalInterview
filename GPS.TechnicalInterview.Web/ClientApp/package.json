@@ -16,11 +16,11 @@
     "@angular/cdk": "^13.3.0",
     "@angular/common": "13.3.0",
     "@angular/compiler": "13.3.0",
-    "@angular/core": "13.3.0",
+    "@angular/core": "^13.3.0",
     "@angular/forms": "13.3.0",
     "@angular/material": "^13.3.0",
     "@angular/platform-browser": "13.3.0",
-    "@angular/platform-browser-dynamic": "13.3.0",
+    "@angular/platform-browser-dynamic": "^13.3.0",
     "@angular/platform-server": "13.3.0",
     "@angular/router": "13.3.0",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
@@ -30,6 +30,7 @@
     "jquery": "^3.5.1",
     "oidc-client": "^1.11.3",
     "popper.js": "^1.16.0",
+    "protractor": "^7.0.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "url": "^0.11.0",
@@ -64,7 +65,6 @@
   },
   "optionalDependencies": {
     "node-sass": "^5.0.0",
-    "protractor": "~5.4.2",
     "ts-node": "~8.4.1",
     "tslint": "~5.20.0"
   }

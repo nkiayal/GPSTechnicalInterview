@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "xwBl/Qb9ipqOfDVsq/0ZoCprB81VjMflJbe66+cpqRA=",
+  "Source": "GPS.ApplicationManager.Web",
+  "BasePath": "_content/GPS.ApplicationManager.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "GPS.ApplicationManager.Web\\wwwroot",
+      "Source": "GPS.ApplicationManager.Web",
+      "ContentRoot": "C:\\Users\\darkg\\source\\repos\\GPSTechnicalInterview\\GPS.TechnicalInterview.Web\\wwwroot\\",
+      "BasePath": "_content/GPS.ApplicationManager.Web",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\darkg\\source\\repos\\GPSTechnicalInterview\\GPS.TechnicalInterview.Web\\wwwroot\\favicon.ico",
+      "SourceId": "GPS.ApplicationManager.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\darkg\\source\\repos\\GPSTechnicalInterview\\GPS.TechnicalInterview.Web\\wwwroot\\",
+      "BasePath": "_content/GPS.ApplicationManager.Web",
+      "RelativePath": "favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.ico"
+    }
+  ]
+}
