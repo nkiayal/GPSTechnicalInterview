@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { ApplicationsComponent } from './applications/applications.component';
+import { ApiService } from './api.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { ApplicationsComponent } from './applications/applications.component';
     NoopAnimationsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

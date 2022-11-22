@@ -24,8 +24,8 @@ C:\Users\darkg\Source\Repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\obj
 C:\Users\darkg\Source\Repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\obj\Debug\net6.0\GPS.ApplicationManager.Web.pdb
 C:\Users\darkg\Source\Repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\obj\Debug\net6.0\GPS.ApplicationManager.Web.genruntimeconfig.cache
 C:\Users\darkg\Source\Repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\obj\Debug\net6.0\ref\GPS.ApplicationManager.Web.dll
-C:\Users\darkg\source\repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\bin\Debug\net6.0\database.json
 C:\Users\darkg\source\repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\darkg\source\repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\darkg\source\repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\darkg\source\repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\darkg\source\repos\GPSTechnicalInterview\GPS.TechnicalInterview.Web\bin\Debug\net6.0\Database\database.json

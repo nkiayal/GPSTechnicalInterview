@@ -15,9 +15,12 @@ export class NavMenuComponent implements OnInit {
   ngOnInit(): void {
 
     this.currentRoute = this.router.url;
-    if (this.currentRoute === '/create-application') {
-      this.headerTitle = 'Create Application';
-    } else {
+      if (this.currentRoute === '/create-application') {
+          this.headerTitle = 'Create Application';
+      } else if (this.currentRoute.includes('/edit-application')) {
+              this.headerTitle = 'Application ' + this.currentRoute.replace('/edit-application/', '');
+      } else {
+          console.log(this.currentRoute.includes)
       this.headerTitle = 'Application Manager';
     }
   }

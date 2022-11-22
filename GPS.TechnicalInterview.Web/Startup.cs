@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Text.Json.Serialization;
 
 namespace GPS.ApplicationManager.Web
 {
@@ -21,8 +23,22 @@ namespace GPS.ApplicationManager.Web
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
-      // In production, the Angular files will be served from this directory
-      services.AddSpaStaticFiles(configuration =>
+
+      services.AddCors(options =>
+        {
+            options.AddPolicy("Policy1",
+                    policy =>
+                    {
+                        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                        
+                    });
+            });
+      services.AddControllers().AddJsonOptions(opt =>
+        {
+            opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
       {
         configuration.RootPath = "ClientApp/dist";
       });
@@ -43,6 +59,7 @@ namespace GPS.ApplicationManager.Web
       }
 
       app.UseHttpsRedirection();
+      app.UseCors("Policy1");
       app.UseStaticFiles();
       if (!env.IsDevelopment())
       {
@@ -50,7 +67,6 @@ namespace GPS.ApplicationManager.Web
       }
 
       app.UseRouting();
-
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllerRoute(
