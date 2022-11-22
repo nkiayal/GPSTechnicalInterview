@@ -37,13 +37,26 @@
                               <button [routerLink]="['/edit-application', row.ApplicationNumber]" mat-menu-item>
                                   <span>Edit</span>
                               </button>
-                              <button (click)="deleteApplication(row.ApplicationNumber)" mat-menu-item>
-                                  <span>Delete</span>
+                              <button (click)="openDialog(row.ApplicationNumber)" mat-menu-item>
+                                  <span>Delete </span>
                               </button>
                           </mat-menu>
                       </span>
                   </td>
               </ng-container>
+              <ng-template #dialogRef let-mydata>
+                  <h1 mat-dialog-title>Delete Application</h1>
+                  <div mat-dialog-content>
+                      Are you sure you want to Delete this application?
+                      <br />
+                  </div>
+                  <button style="float:right;color:cornflowerblue; margin-top: 5%;" mat-button mat-dialog-close='' (click)="deleteApplication(mydata)" >
+                      <span>Confirm </span>
+                  </button>
+                  <button style="float:right; margin-top: 5%;" mat-button mat-dialog-close=''>
+                      <span>Cancel </span>
+                  </button>
+              </ng-template>
               <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns" class="table-row"></tr>
           </table>
