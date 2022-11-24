@@ -14,9 +14,7 @@ namespace GPS.ApplicationManager.Web
         //get all applications
         public string GetApp()
         {
-            var loanApps = JsonConvert.DeserializeObject<List<LoanApplication>>(JsonFile);
-            var result = JsonConvert.SerializeObject(loanApps);
-            return result;
+            return JsonFile;
         }
         //get one application
         public LoanApplication GetOneApp(string ApplicationNumber)
@@ -48,7 +46,6 @@ namespace GPS.ApplicationManager.Web
         public void SaveApplication(LoanApplication loanForm)
         {
             var loanApps = JsonConvert.DeserializeObject<List<LoanApplication>>(GetApp());
-            loanForm.DateApplied = DateOnly.FromDateTime(DateTime.Now);
             loanApps.Add(loanForm);
             var output = JsonConvert.SerializeObject(loanApps);
             if (File.Exists("./database/database.json"))
