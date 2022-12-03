@@ -78,7 +78,7 @@
           <div class="input-wrap">
               <mat-form-field appearance="outline" class="input-wrap__input">
                   <mat-label>Amount</mat-label>
-                  <input matInput  formControlName="amount" placeholder="Amount">
+                  <input matInput (ngModelChange)="monthlyPayAmntChan()" formControlName="amount" placeholder="Amount">
                   <mat-error *ngIf="applicationForm.get('amount').errors">
                       Invalid Amount
                   </mat-error>
@@ -87,7 +87,7 @@
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Monthly Payment Amount</mat-label>
-              <input matInput [readonly]="true" [ngModel]="+applicationForm.value.amount/+applicationForm.value.terms" formControlName="monthlyPayAmount" placeholder="Monthly Payment Amount">
+              <input matInput [readonly]="true" [ngModel]="monthlyPayAmnt"  formControlName="monthlyPayAmount" placeholder="Monthly Payment Amount">
             </mat-form-field>
           </div>
         </div>
@@ -95,7 +95,7 @@
           <div class="input-wrap" id="lastInput">
               <mat-form-field appearance="outline" class="input-wrap__input">
                   <mat-label>Terms </mat-label>
-                  <input matInput formControlName="terms" placeholder="Terms ">
+                  <input matInput (ngModelChange)="monthlyPayAmntChan()" formControlName="terms" placeholder="Terms ">
                   <mat-error *ngIf="applicationForm.get('terms').errors">
                       Terms is required.
                   </mat-error>

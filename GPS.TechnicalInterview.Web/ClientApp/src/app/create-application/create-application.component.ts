@@ -40,13 +40,24 @@ export class CreateApplicationComponent implements OnInit {
           email: new FormControl(null, [Validators.required, Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)]),
           applicationNumber: new FormControl(null, [Validators.required]),
           status: ['New'],
-          amount: new FormControl(0, [Validators.required, Validators.min(1)]),
-          monthlyPayAmount: new FormControl(0, [Validators.required]),
+            amount: new FormControl(0, [Validators.required, Validators.min(1)]),
+            monthlyPayAmount: new FormControl(0, [Validators.required]),
           terms: new FormControl(0, [Validators.required, Validators.min(1)]),
         });
     }
     openSnackBar(message: string) {
         this._snackBar.open(message, "OK");
+    }
+    public monthlyPayAmnt;
+    monthlyPayAmntChan() {
+        let amnt = this.applicationForm.get("amount").value;
+        let terms = this.applicationForm.get("terms").value;
+        console.log("changed..",amnt,terms)
+        if (amnt > 0 && terms > 0) {
+            this.monthlyPayAmnt = amnt / terms;
+        } else {
+            this.monthlyPayAmnt = 0;
+        }
     }
     public id;
     public isReadOnly;
