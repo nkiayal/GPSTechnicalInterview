@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using GPS.ApplicationManager.Web;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace GPS.ApplicationManager.Web.Controllers
 {
@@ -26,36 +27,96 @@ namespace GPS.ApplicationManager.Web.Controllers
         [HttpGet("getApps")]
         public ActionResult<Array> Get()
         {
-            var theData = database.GetApp();
-            return Ok(theData);
+            try
+            {
+                var theData = database.GetApp();
+                return Ok(theData);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            } 
+
         }
         [HttpGet("{AppNumber}")]
         public ActionResult<LoanApplication> GetOneApp(string AppNumber)
         {
+            try
+            {
             var theData = database.GetOneApp(AppNumber);
-            return Ok(theData);
+                return Ok(theData);
+
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine(ex);
+                return BadRequest(ex.Message);  
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
 
         }
         [HttpPost("saveApp")]
         public ActionResult SaveApp(LoanApplication loanApplication)
         {
+            try
+            {
             loanApplication.DateApplied = DateOnly.FromDateTime(DateTime.Now);
-            Console.Write("Loan curr date: ");
-            Console.WriteLine(loanApplication.DateApplied.ToString());
             database.SaveApplication(loanApplication);
             return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine(ex);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
         }
         [HttpPut("{id}")]
         public ActionResult EditApp(string id, LoanApplication loanApplication)
         {
+            try
+            {
             database.UpdateApp(id, loanApplication);
             return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine(ex);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
         }
         [HttpDelete("{AppNumber}")]
         public ActionResult DeleteApp(string AppNumber)
         {
+            try
+            {
             database.deleteApplication(AppNumber);
             return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine(ex);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }
