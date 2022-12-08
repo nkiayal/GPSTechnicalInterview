@@ -6,7 +6,8 @@ import { CreateApplicationComponent } from './create-application/create-applicat
 export const routes: Routes = [
   { path: '', redirectTo: '/applications', pathMatch: 'full' },
   { path: 'applications', component: ApplicationsComponent },
-  { path: 'create-application', component: CreateApplicationComponent },
+    { path: 'create-application', component: CreateApplicationComponent },
+    { path: 'edit-application/:id', component: CreateApplicationComponent },
   { path: '**', redirectTo: '/applications'},
 ];
 

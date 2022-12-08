@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/GPS.TechnicalInterview.Web/ClientApp/node_modules
+/GPS.TechnicalInterview.Web/ClientApp/.angular/cache/13.3.0
