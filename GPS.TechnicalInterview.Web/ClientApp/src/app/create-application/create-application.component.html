@@ -1,5 +1,5 @@
 <app-nav-menu></app-nav-menu>
-<section class="application-details">
+<section class="application-details" *ngIf="formReady">
   <mat-card class="section-details">
     <mat-card-title class="section-details-title">Personal Information</mat-card-title>
     <form [formGroup]="applicationForm">
@@ -7,13 +7,13 @@
         <div class="input-wrap-row">
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
-              <mat-label>First Name *</mat-label>
+              <mat-label>First Name</mat-label>
               <input matInput formControlName="firstName" placeholder="First Name *">
             </mat-form-field>
           </div>
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
-              <mat-label>Last Name *</mat-label>
+              <mat-label>Last Name</mat-label>
               <input matInput formControlName="lastName" placeholder="Last Name *">
             </mat-form-field>
           </div>
@@ -78,7 +78,7 @@
       <hr />
     </form>
     <mat-card-actions class="details-buttons">
-      <button mat-button color="primary">SAVE</button>
+      <button mat-button color="primary" (click)="createOrSave()">SAVE</button>
     </mat-card-actions>
 </mat-card>
 </section>

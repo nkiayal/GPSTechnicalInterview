@@ -105,6 +105,14 @@
     th.mat-header-cell:first-of-type {
         padding-left: 1rem;
     }
+    :hover {
+      .action-menu {
+        visibility: visible;
+      }
+    }
+    .action-menu {
+      visibility: hidden;
+    }
   }
 }
 .add-btn-container {

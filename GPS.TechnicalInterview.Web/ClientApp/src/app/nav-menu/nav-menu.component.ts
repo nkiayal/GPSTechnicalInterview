@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,12 +11,15 @@ export class NavMenuComponent implements OnInit {
   public headerTitle: string = '';
   public currentRoute: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
   ngOnInit(): void {
+    const applicationNumber = this.activatedRoute.snapshot.paramMap.get('applicationNumber')
 
     this.currentRoute = this.router.url;
     if (this.currentRoute === '/create-application') {
       this.headerTitle = 'Create Application';
+    } else if(this.currentRoute.includes('/create-application')) {
+      this.headerTitle = `Application ${applicationNumber}`;
     } else {
       this.headerTitle = 'Application Manager';
     }

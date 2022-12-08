@@ -1,0 +1,9 @@
+#dialog-width {
+  width: 250px;
+  #actions {
+    float: right;
+    :first-child {
+      margin-right: 10px;
+    }
+  }
+}
