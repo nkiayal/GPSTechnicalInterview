@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { ApplicationsComponent } from './applications/applications.component';
+import { ConfirmationModule } from './shared/confirmation/confirmation.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ApplicationsComponent } from './applications/applications.component';
     AppRoutingModule,
     NoopAnimationsModule,
     MaterialModule,
+    ConfirmationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,21 +11,38 @@
         </div>
       </div>
     </div>
-    <ng-container>
+    <ng-container *ngIf="loanApplications | async as loanApplications">
       <ng-container>
-        <table mat-table>
+        <table mat-table [dataSource]="loanApplications">
           <ng-container matColumnDef="applicationNumber">
             <th mat-header-cell *matHeaderCellDef>Application Number</th>
+            <td mat-cell *matCellDef="let application"> {{application.ApplicationNumber}} </td>
           </ng-container>
           <ng-container matColumnDef="amount">
             <th mat-header-cell *matHeaderCellDef>Amount</th>
+            <td mat-cell *matCellDef="let application"> {{application.LoanTerms.Amount | currency}} </td>
           </ng-container>
           <ng-container matColumnDef="dateApplied">
             <th mat-header-cell *matHeaderCellDef>Date Applied</th>
+            <td mat-cell *matCellDef="let application"> {{application.DateApplied}} </td>
           </ng-container>
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let application"> {{application.Status}} </td>
           </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell width="10" *matCellDef="let application" class="action-menu"> 
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openApplication(application)">Edit</button>
+                <button mat-menu-item (click)="deleteApplication(application)">Delete</button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
           <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns" class="table-row"></tr>
         </table>
