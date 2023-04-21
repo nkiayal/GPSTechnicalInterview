@@ -115,6 +115,8 @@ modules/.vscode
 # Don't check in secret files
 *secret.js
 
+/.angular/cache
+
 # Ignore npm/yarn debug log
 npm-debug.log
 yarn-error.log
