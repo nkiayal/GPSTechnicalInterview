@@ -21,6 +21,10 @@ namespace GPS.ApplicationManager.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddSwaggerGen(c =>
+        c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "pplication Manager API", Version = "v1"})
+      );
+
       services.AddControllersWithViews();
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
@@ -50,6 +54,12 @@ namespace GPS.ApplicationManager.Web
       if (!env.IsDevelopment())
       {
         app.UseSpaStaticFiles();
+      }
+      else {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+          c.SwaggerEndpoint("/swagger/v1/swagger.json", "Application Manager API V1")
+        );
       }
 
       app.UseRouting();

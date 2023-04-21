@@ -9,12 +9,12 @@
         public int MonthlyPaymentAmountCents { get; init; }
         public uint Term { get; init; }
 
-        public LoanTerms(int amountDollars, int amountCents, int monthlyPaymentDollars, int monthlyPaymentCents, uint term) 
+        public LoanTerms(int amountDollars, int amountCents, int monthlyPaymentAmountDollars, int monthlyPaymentAmountCents, uint term) 
         {
             AmountDollars = amountDollars;
             AmountCents = amountCents;
-            MonthlyPaymentAmountDollars = monthlyPaymentDollars;
-            MonthlyPaymentAmountCents = monthlyPaymentCents;
+            MonthlyPaymentAmountDollars = monthlyPaymentAmountDollars;
+            MonthlyPaymentAmountCents = monthlyPaymentAmountCents;
             Term = term;
         }
     }
