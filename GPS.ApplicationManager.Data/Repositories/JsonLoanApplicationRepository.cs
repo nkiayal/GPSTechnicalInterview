@@ -39,6 +39,15 @@ namespace GPS.ApplicationManager.Data.Repositories
             return loanApplication;
         }
 
+        public IEnumerable<LoanApplication> GetLoanApplications()
+        {
+            var collection = _store.GetCollection<LoanApplication>();
+
+            var loanApplications = from loanApplication in collection.AsQueryable() select loanApplication;
+
+            return loanApplications;
+        }
+
         public async Task UpdateLoanApplicationAsync(LoanApplication loanApplication)
         {
             var collection = _store.GetCollection<LoanApplication>();

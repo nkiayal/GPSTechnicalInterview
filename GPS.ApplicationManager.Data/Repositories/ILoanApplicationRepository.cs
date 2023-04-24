@@ -10,5 +10,7 @@ namespace GPS.ApplicationManager.Data.Repositories
         Task UpdateLoanApplicationAsync(LoanApplication loanApplication);
         Task DeleteLoanApplicationAsync(string applicationNumber);
         LoanApplication GetLoanApplicationByApplicationNumber(string applicationNumber);
+
+        IEnumerable<LoanApplication> GetLoanApplications();
     }
 }

@@ -3,6 +3,8 @@ using GPS.ApplicationManager.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GPS.ApplicationManager.Web.Controllers
@@ -21,6 +23,7 @@ namespace GPS.ApplicationManager.Web.Controllers
             _loanAppRepository = loanAppRepository;
         }
 
+        [Route("[action]")]
         [HttpPost]
         public async Task<ActionResult> CreateLoanApplication(LoanApplication loanApplication)
         {
@@ -36,6 +39,7 @@ namespace GPS.ApplicationManager.Web.Controllers
             }
         }
 
+        [Route("[action]")]
         [HttpGet]
         public ActionResult<LoanApplication> GetLoanApplicationByNumber(string loanApplicationNumber)
         {
@@ -52,6 +56,24 @@ namespace GPS.ApplicationManager.Web.Controllers
 
         }
 
+        [Route("[action]")]
+        [HttpGet]
+        public ActionResult<IEnumerable<LoanApplication>> GetLoanApplications() 
+        {
+           try
+           {
+                List<LoanApplication> loanApplications = _loanAppRepository.GetLoanApplications().ToList();
+
+                return loanApplications;
+           }
+           catch (Exception ex) 
+           {
+                return StatusCode(500);
+           }
+
+        }
+
+        [Route("[action]")]
         [HttpPatch]
         public async Task<ActionResult> UpdateLoanApplication(LoanApplication loanApplication)
         {
@@ -67,6 +89,7 @@ namespace GPS.ApplicationManager.Web.Controllers
             }
         }
 
+        [Route("[action]")]
         [HttpDelete]
         public async Task<ActionResult> DeleteLoanApplication(string loanApplicationNumber)
         {
