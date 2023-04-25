@@ -6,15 +6,15 @@ namespace GPS.ApplicationManager.Data.Models
     {
         public string ApplicationNumber { get; init; }
         public LoanTerms LoanTerms { get; init; }
-        public Personalnformation Personalnformation { get; init; }
+        public PersonalInformation PersonalInformation { get; init; }
         public DateTime DateApplied { get; init; }
         public Status Status { get; init; }
 
-        public LoanApplication(string applicationNumber, LoanTerms loanTerms, Personalnformation personalnformation, DateTime dateApplied, Status status)
+        public LoanApplication(string applicationNumber, LoanTerms loanTerms, PersonalInformation personalnformation, DateTime dateApplied, Status status)
         {
             ApplicationNumber = applicationNumber;
             LoanTerms = loanTerms;
-            Personalnformation = personalnformation;    
+            PersonalInformation = personalnformation;    
             DateApplied = dateApplied;
             Status = status;
         }

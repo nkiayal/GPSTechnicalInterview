@@ -1,13 +1,13 @@
 ﻿namespace GPS.ApplicationManager.Data.Models
 
 {
-    public class Personalnformation
+    public class PersonalInformation
     {
         public Name Name { get; init; }
         public string PhoneNumber { get; init; }
         public string Email { get; init; }
 
-        public Personalnformation(Name name, string phoneNumber, string email)
+        public PersonalInformation(Name name, string phoneNumber, string email)
         {
             Name = name;
             PhoneNumber = phoneNumber;
