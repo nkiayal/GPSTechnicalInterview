@@ -9,7 +9,8 @@
 
         public LoanTerms(double amount, double monthlyPaymentAmount, uint term) 
         {
-
+            Amount = amount;
+            MonthlyPaymentAmount = monthlyPaymentAmount;
             Term = term;
         }
     }

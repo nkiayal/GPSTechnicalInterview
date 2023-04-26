@@ -1,6 +1,9 @@
 <h1 mat-dialog-title>Confirm Deletion</h1>
 <div mat-dialog-content>
-    <button mat-button (click)="confirmDelete()">Confirm</button>
+    Are you sure you want to delete this application?
+</div>
+<div mat-dialog-actions>
     <button mat-button (click)="cancelDelete()">Cancel</button>
+    <button mat-button color="warn" (click)="confirmDelete()">Confirm</button>
 </div>
 

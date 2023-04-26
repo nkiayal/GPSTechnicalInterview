@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { ApiService } from "../api.service";
 import { LoanApplication } from "../models/loanApplication";
 import { Status } from "../models/status";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-create-application",
@@ -16,6 +17,7 @@ export class CreateApplicationComponent {
   public createMode: boolean
 
   constructor(
+    public snackBar: MatSnackBar,
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -37,7 +39,6 @@ export class CreateApplicationComponent {
 
   ngOnInit() {
     this.createMode = this.router.url === '/create-application';
-    console.log(this.createMode)
 
     const applicationNumber: string =
       this.route.snapshot.paramMap.get("applicationNumber");
@@ -80,9 +81,11 @@ export class CreateApplicationComponent {
 
       if (this.router.url === "/create-application") {
         this.apiService.createLoanApplication(loanApp).subscribe();
+        this.snackBar.open("Created Successfully", "OK", {duration: 3000})
       }
       else {
         this.apiService.updateLoanApplication(loanApp).subscribe();
+        this.snackBar.open("Saved Successfully", "OK", {duration: 3000})
       }
     }
   }
