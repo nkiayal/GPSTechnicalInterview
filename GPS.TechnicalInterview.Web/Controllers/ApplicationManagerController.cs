@@ -27,82 +27,45 @@ namespace GPS.ApplicationManager.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateLoanApplication(LoanApplication loanApplication)
         {
-            try
-            {
-                await _loanAppRepository.CreateLoanApplicationAsync(loanApplication);
+            await _loanAppRepository.CreateLoanApplicationAsync(loanApplication);
 
-                return StatusCode(200);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500);
-            }
+            return StatusCode(200);
         }
 
         [Route("[action]")]
         [HttpGet]
         public ActionResult<LoanApplication> GetLoanApplicationByNumber(string loanApplicationNumber)
         {
-            try
-            {
-                LoanApplication loanApplication = _loanAppRepository.GetLoanApplicationByApplicationNumber(loanApplicationNumber);
+            LoanApplication loanApplication = _loanAppRepository.GetLoanApplicationByApplicationNumber(loanApplicationNumber);
 
-                return loanApplication;
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500);
-            }
-
+            return loanApplication;        
         }
 
         [Route("[action]")]
         [HttpGet]
         public ActionResult<IEnumerable<LoanApplication>> GetLoanApplications() 
         {
-           try
-           {
-                List<LoanApplication> loanApplications = _loanAppRepository.GetLoanApplications().ToList();
+            List<LoanApplication> loanApplications = _loanAppRepository.GetLoanApplications().ToList();
 
-                return loanApplications;
-           }
-           catch (Exception ex) 
-           {
-                return StatusCode(500);
-           }
-
+            return loanApplications;
         }
 
         [Route("[action]")]
         [HttpPut]
         public async Task<ActionResult> UpdateLoanApplication(LoanApplication loanApplication)
         {
-            try
-            {
                 await _loanAppRepository.UpdateLoanApplicationAsync(loanApplication);
 
                 return StatusCode(200);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500);
-            }
         }
 
         [Route("[action]")]
         [HttpDelete]
         public async Task<ActionResult> DeleteLoanApplication(string loanApplicationNumber)
         {
-            try
-            {
-                await _loanAppRepository.DeleteLoanApplicationAsync(loanApplicationNumber);
+            await _loanAppRepository.DeleteLoanApplicationAsync(loanApplicationNumber);
 
-                return StatusCode(200);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500);
-            }
+            return StatusCode(200);
         }
 
     }

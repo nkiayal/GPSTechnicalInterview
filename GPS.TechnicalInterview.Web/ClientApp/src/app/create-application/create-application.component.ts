@@ -26,8 +26,8 @@ export class CreateApplicationComponent {
     this.applicationForm = this.formBuilder.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
-      phoneNumber: [null, [Validators.minLength(9), Validators.maxLength(9)]],
-      email: [null, Validators.email],
+      phoneNumber: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      email: [null, Validators.required, Validators.email],
       applicationNumber: [null, Validators.required],
       status: ["New", Validators.required],
       amount: [null, [Validators.required, Validators.min(0.01)]],

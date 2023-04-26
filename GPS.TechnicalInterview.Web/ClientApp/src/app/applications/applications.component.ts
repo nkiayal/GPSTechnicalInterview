@@ -19,7 +19,7 @@ export class ApplicationsComponent {
     "amount",
     "dateApplied",
     "status",
-    "meatballs",
+    "dropdownMenu",
   ];
 
   constructor(private apiService: ApiService, public dialog: MatDialog) {}
