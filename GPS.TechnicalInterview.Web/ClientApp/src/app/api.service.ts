@@ -64,6 +64,18 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
+  createLoanApplication(application: LoanApplication): Observable<unknown> {
+    return this.http
+      .post("/ApplicationManager/CreateLoanApplication", application)
+      .pipe(catchError(this.handleError));
+  }
+
+  updateLoanApplication(application: LoanApplication): Observable<unknown> {
+    return this.http
+      .put("/ApplicationManager/UpdateLoanApplication", application)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error("An error occurred", error.error);

@@ -1,7 +1,5 @@
 export interface LoanTerms {
-    amountDollars: number;
-    amountCents: number;
-    monthlyPaymentAmountDollars: number;
-    monthlyPaymentAmountCents: number;
+    amount: number;
+    monthlyPaymentAmount: number;
     term: number;
 }

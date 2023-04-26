@@ -3,7 +3,7 @@
 <section class="application-details">
   <mat-card class="section-details">
     <mat-card-title class="section-details-title">Personal Information</mat-card-title>
-    <form [formGroup]="applicationForm">
+    <form [formGroup]="applicationForm" (ngSubmit)="submitApplication()">
       <section class="section-details-body">
         <div class="input-wrap-row">
           <div class="input-wrap">
@@ -29,7 +29,7 @@
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Email</mat-label>
-              <input matInput formControlName="email" placeholder="Email">
+              <input matInput formControlName="email" placeholder="Email" type="email">
             </mat-form-field>
           </div>
         </div>
@@ -41,7 +41,7 @@
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Application Number *</mat-label>
-              <input matInput formControlName="applicationNumber" placeholder="Application Number *">
+              <input matInput formControlName="applicationNumber" placeholder="Application Number *" [readonly]="!createMode ? true : null">
             </mat-form-field>
           </div>
           <div class="input-wrap">
@@ -57,13 +57,13 @@
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Amount *</mat-label>
-              <input matInput formControlName="amount" placeholder="Amount *">
+              <input matInput (input)="calculateMonthlyPaymentAmount()" formControlName="amount" placeholder="Amount *">
             </mat-form-field>
           </div>
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Monthly Payment Amount</mat-label>
-              <input matInput formControlName="monthlyPayAmount" placeholder="Monthly Payment Amount">
+              <input matInput formControlName="monthlyPayAmount" placeholder="Monthly Payment Amount" readonly>
             </mat-form-field>
           </div>
         </div>
@@ -71,15 +71,15 @@
           <div class="input-wrap" id="lastInput">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Terms *</mat-label>
-              <input matInput formControlName="terms" placeholder="Terms *">
+              <input matInput (input)="calculateMonthlyPaymentAmount()" formControlName="terms" placeholder="Terms *">
             </mat-form-field>
           </div>
         </div>
       </section>
       <hr />
+      <mat-card-actions class="details-buttons">
+        <button mat-button color="primary" type="submit" [disabled]="!applicationForm.valid">SAVE</button>
+      </mat-card-actions>
     </form>
-    <mat-card-actions class="details-buttons">
-      <button mat-button color="primary">SAVE</button>
-    </mat-card-actions>
 </mat-card>
 </section>

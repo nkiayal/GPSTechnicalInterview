@@ -11,6 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { ApplicationsComponent } from './applications/applications.component';
 import { DeleteDialog } from './delete-dialog/delete-dialog.component';
+import { ApplicationStatus } from './pipes/status.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DeleteDialog } from './delete-dialog/delete-dialog.component';
     NavMenuComponent,
     ApplicationsComponent,
     CreateApplicationComponent,
-    DeleteDialog
+    DeleteDialog,
+    ApplicationStatus
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

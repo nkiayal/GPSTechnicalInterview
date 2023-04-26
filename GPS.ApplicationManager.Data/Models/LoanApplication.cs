@@ -10,11 +10,11 @@ namespace GPS.ApplicationManager.Data.Models
         public DateTime DateApplied { get; init; }
         public Status Status { get; init; }
 
-        public LoanApplication(string applicationNumber, LoanTerms loanTerms, PersonalInformation personalnformation, DateTime dateApplied, Status status)
+        public LoanApplication(string applicationNumber, LoanTerms loanTerms, PersonalInformation personalInformation, DateTime dateApplied, Status status)
         {
             ApplicationNumber = applicationNumber;
             LoanTerms = loanTerms;
-            PersonalInformation = personalnformation;    
+            PersonalInformation = personalInformation;    
             DateApplied = dateApplied;
             Status = status;
         }

@@ -74,7 +74,7 @@ namespace GPS.ApplicationManager.Web.Controllers
         }
 
         [Route("[action]")]
-        [HttpPatch]
+        [HttpPut]
         public async Task<ActionResult> UpdateLoanApplication(LoanApplication loanApplication)
         {
             try

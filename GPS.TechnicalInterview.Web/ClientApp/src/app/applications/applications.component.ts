@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ApiService } from "../api.service";
 import { LoanApplication } from "../models/loanApplication";
-import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { DeleteDialog } from "../delete-dialog/delete-dialog.component";
+import { Status } from "../models/status";
 
 @Component({
   selector: "app-applications",

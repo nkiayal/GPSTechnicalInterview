@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { ApiService } from "../api.service";
 import { LoanApplication } from "../models/loanApplication";
@@ -13,50 +13,102 @@ import { Status } from "../models/status";
 export class CreateApplicationComponent {
   public applicationForm: FormGroup;
   public statuses: Array<string> = ["New", "Approved", "Funded"];
+  public createMode: boolean
 
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.applicationForm = this.formBuilder.group({
-      firstName: [null],
-      lastName: [null],
-      phoneNumber: [null],
-      email: [null],
-      applicationNumber: [null],
-      status: ["New"],
-      amount: [null],
+      firstName: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      phoneNumber: [null, [Validators.minLength(9), Validators.maxLength(9)]],
+      email: [null, Validators.email],
+      applicationNumber: [null, Validators.required],
+      status: ["New", Validators.required],
+      amount: [null, [Validators.required, Validators.min(0.01)]],
       monthlyPayAmount: [null],
-      terms: [null],
+      terms: [null, [Validators.required, Validators.min(1)]],
     });
   }
 
+
   ngOnInit() {
+    this.createMode = this.router.url === '/create-application';
+    console.log(this.createMode)
+
     const applicationNumber: string =
       this.route.snapshot.paramMap.get("applicationNumber");
 
-    this.apiService
-      .getLoanApplicationByNumber(applicationNumber)
-      .subscribe((loanApp) => {
-        console.debug(loanApp)
-        
-        this.applicationForm.setValue({
-          firstName: loanApp.personalInformation.name.first,
-          lastName: loanApp.personalInformation.name.last,
-          phoneNumber: loanApp.personalInformation.phoneNumber,
-          email: loanApp.personalInformation.email,
-          applicationNumber: loanApp.applicationNumber,
-          status: Status[loanApp.status],
-          amount:
-            loanApp.loanTerms.amountDollars +
-            loanApp.loanTerms.amountCents / 100,
-          monthlyPayAmount:
-            loanApp.loanTerms.monthlyPaymentAmountDollars +
-            loanApp.loanTerms.monthlyPaymentAmountCents / 100,
-          terms: loanApp.loanTerms.term,
+    if (applicationNumber) {
+      this.apiService
+        .getLoanApplicationByNumber(applicationNumber)
+        .subscribe((loanApp) => {
+          console.debug(loanApp)
+          
+          this.applicationForm.setValue({
+            firstName: loanApp.personalInformation.name.first,
+            lastName: loanApp.personalInformation.name.last,
+            phoneNumber: loanApp.personalInformation.phoneNumber,
+            email: loanApp.personalInformation.email,
+            applicationNumber: loanApp.applicationNumber,
+            status: Status[loanApp.status],
+            amount: loanApp.loanTerms.amount,
+            monthlyPayAmount: loanApp.loanTerms.monthlyPaymentAmount,
+            terms: loanApp.loanTerms.term,
+          });
         });
-      });
+    }
+  }
 
+  calculateMonthlyPaymentAmount() {
+    if (this.applicationForm && this.applicationForm.get("amount").value > 0.01 && this.applicationForm.get("terms").value > 0) {
+       this.applicationForm.patchValue({
+        monthlyPayAmount: this.applicationForm.get("amount").value / this.applicationForm.get("terms").value
+       })
+    }
+    else {
+      this.applicationForm.patchValue({monthlyPayAmount: ""})
+    }
+  }
+
+  submitApplication() {
+    if (this.applicationForm.valid) {
+      const loanApp = this.convertFormControlsToLoanApplication();
+
+      if (this.router.url === "/create-application") {
+        this.apiService.createLoanApplication(loanApp).subscribe();
+      }
+      else {
+        this.apiService.updateLoanApplication(loanApp).subscribe();
+      }
+    }
+  }
+
+  convertFormControlsToLoanApplication(): LoanApplication {
+    const formControlValues = this.applicationForm.value;
+
+    const loanApplication: LoanApplication = {
+      applicationNumber: formControlValues.applicationNumber,
+      loanTerms: {
+        amount: formControlValues.amount,
+        monthlyPaymentAmount: formControlValues.monthlyPayAmount,
+        term: formControlValues.terms
+      },
+      personalInformation: {
+        name: {
+          first: formControlValues.firstName,
+          last: formControlValues.lastName
+        },
+        email: formControlValues.email,
+        phoneNumber: formControlValues.phoneNumber
+      },
+      dateApplied: new Date(),
+      status: Status[<string>formControlValues.status]
+    } 
+
+    return loanApplication;
   }
 }
