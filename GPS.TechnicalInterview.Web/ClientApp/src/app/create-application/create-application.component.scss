@@ -8,6 +8,8 @@
     max-height: calc(100vh - 104px);
   }
 
+  
+
   .section-details {
     padding: 0;
     margin-bottom: 1rem;
@@ -27,17 +29,28 @@
       .input-wrap-row {
         display: flex;
 
+        
         .input-wrap {
           width: 100%;
           display: flex;
-          .input-wrap__input {
+          flex-direction: column;
+          
+          .input-wrap__input .mat-form-field-wrapper {
             flex-grow: 1;
+            margin-bottom: -1.25em;
           }
         }
 
         .input-wrap:first-child {
           margin-right: 15px;
+          
         }
+
+        .error-message {
+          font-size: smaller;
+          color: red
+        }
+
         #lastInput {
           margin-right: 0;
         }
