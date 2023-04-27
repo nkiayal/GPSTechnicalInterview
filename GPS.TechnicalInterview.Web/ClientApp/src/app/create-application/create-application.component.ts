@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { ApiService } from "../api.service";
@@ -10,6 +10,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   selector: "app-create-application",
   templateUrl: "./create-application.component.html",
   styleUrls: ["./create-application.component.scss"],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateApplicationComponent {
   public applicationForm: FormGroup;
@@ -27,9 +28,9 @@ export class CreateApplicationComponent {
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-      email: [null, Validators.required, Validators.email],
+      email: [null, [Validators.required, Validators.email]],
       applicationNumber: [null, Validators.required],
-      status: ["New", Validators.required],
+      status: ["New", [Validators.required]],
       amount: [null, [Validators.required, Validators.min(0.01)]],
       monthlyPayAmount: [null],
       terms: [null, [Validators.required, Validators.min(1)]],
@@ -46,9 +47,7 @@ export class CreateApplicationComponent {
     if (applicationNumber) {
       this.apiService
         .getLoanApplicationByNumber(applicationNumber)
-        .subscribe((loanApp) => {
-          console.debug(loanApp)
-          
+        .subscribe((loanApp) => {          
           this.applicationForm.setValue({
             firstName: loanApp.personalInformation.name.first,
             lastName: loanApp.personalInformation.name.last,

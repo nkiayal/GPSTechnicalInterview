@@ -12,8 +12,9 @@ export class DeleteDialog implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {applicationNumber: string}, private apiService: ApiService, public dialogRef: MatDialogRef<DeleteDialog>) { }
 
-  confirmDelete() {
-    this.apiService.deleteLoanApplication(this.data.applicationNumber).subscribe();
+  async confirmDelete() {
+    //This needs to be awaited otherwise the applications component may update its list of applications faster than this application is deleted 
+    await this.apiService.deleteLoanApplication(this.data.applicationNumber).toPromise();
     this.dialogRef.close("Deleted");
   }
 

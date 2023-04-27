@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace GPS.ApplicationManager.Web.Controllers
 {
@@ -29,6 +30,8 @@ namespace GPS.ApplicationManager.Web.Controllers
         {
             await _loanAppRepository.CreateLoanApplicationAsync(loanApplication);
 
+            Log.Information("Created loan application with application number {applicationNumber}", loanApplication.ApplicationNumber);
+
             return StatusCode(200);
         }
 
@@ -37,6 +40,8 @@ namespace GPS.ApplicationManager.Web.Controllers
         public ActionResult<LoanApplication> GetLoanApplicationByNumber(string loanApplicationNumber)
         {
             LoanApplication loanApplication = _loanAppRepository.GetLoanApplicationByApplicationNumber(loanApplicationNumber);
+
+            Log.Information("Got loan application with application number {applicationNumber}", loanApplication.ApplicationNumber);
 
             return loanApplication;        
         }
@@ -47,6 +52,8 @@ namespace GPS.ApplicationManager.Web.Controllers
         {
             List<LoanApplication> loanApplications = _loanAppRepository.GetLoanApplications().ToList();
 
+            Log.Information("Got all loan applications");
+
             return loanApplications;
         }
 
@@ -54,9 +61,11 @@ namespace GPS.ApplicationManager.Web.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateLoanApplication(LoanApplication loanApplication)
         {
-                await _loanAppRepository.UpdateLoanApplicationAsync(loanApplication);
+            await _loanAppRepository.UpdateLoanApplicationAsync(loanApplication);
 
-                return StatusCode(200);
+            Log.Information("Updated loan application with application number {applicationNumber}", loanApplication.ApplicationNumber);
+
+            return StatusCode(200);
         }
 
         [Route("[action]")]
@@ -64,6 +73,8 @@ namespace GPS.ApplicationManager.Web.Controllers
         public async Task<ActionResult> DeleteLoanApplication(string loanApplicationNumber)
         {
             await _loanAppRepository.DeleteLoanApplicationAsync(loanApplicationNumber);
+
+            Log.Information("Deleted loan application with applicaiton number {applicationNumber}", loanApplicationNumber);
 
             return StatusCode(200);
         }
