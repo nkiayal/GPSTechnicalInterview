@@ -1,0 +1,61 @@
+﻿<Properties StartupConfiguration="{9D0EE016-D83A-41B6-BAC5-78217C876CA7}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ClientApp/src/app/interfaces/application.interface.ts">
+    <Files>
+      <File FileName="ClientApp/src/app/app.module.ts" />
+      <File FileName="ClientApp/src/app/nav-menu/nav-menu.component.ts" />
+      <File FileName="ClientApp/src/app/components/edit-loan/edit-loan.component.ts" />
+      <File FileName="ClientApp/src/app/shared/material.module.ts" />
+      <File FileName="ClientApp/src/app/providers/snackbar.service.ts" />
+      <File FileName="ClientApp/src/app/applications/applications.component.ts" />
+      <File FileName="ClientApp/src/app/create-application/create-application.component.ts" />
+      <File FileName="ClientApp/src/app/components/edit-loan/edit-loan.component.html" />
+      <File FileName="ClientApp/src/app/components/snackbar/snackbar.component.ts" />
+      <File FileName="ClientApp/src/app/components/snackbar/snackbar.component.html" />
+      <File FileName="ClientApp/src/app/validators/personal-information.validator.ts" />
+      <File FileName="ClientApp/src/app/directives/valid-phone-number-directive.directive.ts" />
+      <File FileName="ClientApp/src/app/app-routing.module.ts" />
+      <File FileName="ClientApp/src/app/create-application/create-application.component.html" />
+      <File FileName="ClientApp/src/app/app.component.html" />
+      <File FileName="ClientApp/src/app/app.component.ts" />
+      <File FileName="ClientApp/src/environments/environment.ts" />
+      <File FileName="ClientApp/src/index.html" />
+      <File FileName="ClientApp/src/app/applications/applications.component.html" />
+      <File FileName="ClientApp/src/app/nav-menu/nav-menu.component.html" />
+      <File FileName="ClientApp/src/app/providers/requestor-loan-application.service.ts" />
+      <File FileName="ClientApp/src/app/providers/application.service.ts" />
+      <File FileName="ClientApp/src/app/interfaces/application.interface.ts" Line="20" Column="3" />
+      <File FileName="ClientApp/src/app/interfaces/status.interface.ts" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="GPS.ApplicationManager.Web" expanded="True">
+            <Node name="GPS.ApplicationManager.Web" expanded="True">
+              <Node name="ClientApp" expanded="True">
+                <Node name="src" expanded="True">
+                  <Node name="app" expanded="True">
+                    <Node name="interfaces" expanded="True">
+                      <Node name="application.interface.ts" selected="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Pages" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="Utilities" expanded="True" />
+              <Node name="wwwroot" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.GPS.ApplicationManager.Web PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

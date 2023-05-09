@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateApplicationComponent } from './create-application.component';
+import { ConfirmDeleteComponent } from './confirm-delete.component';
 
-describe('CreateApplicationComponent', () => {
-  let component: CreateApplicationComponent;
-  let fixture: ComponentFixture<CreateApplicationComponent>;
+describe('ConfirmDeleteComponent', () => {
+  let component: ConfirmDeleteComponent;
+  let fixture: ComponentFixture<ConfirmDeleteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateApplicationComponent ]
+      declarations: [ ConfirmDeleteComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateApplicationComponent);
+    fixture = TestBed.createComponent(ConfirmDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

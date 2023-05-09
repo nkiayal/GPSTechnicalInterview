@@ -20,13 +20,13 @@ namespace GPS.ApplicationManager.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddControllersWithViews();
-      // In production, the Angular files will be served from this directory
-      services.AddSpaStaticFiles(configuration =>
-      {
-        configuration.RootPath = "ClientApp/dist";
-      });
-    }
+      // services.AddSwaggerGen();
+      services.AddControllers();
+
+      services.AddCors();
+
+      services.AddSwaggerGen();
+        }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,6 +51,14 @@ namespace GPS.ApplicationManager.Web
 
       app.UseRouting();
 
+    app.UseCors(builder => {
+        builder.WithOrigins("http://localhost:4200");
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+    });
+    app.UseAuthorization();
+    
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllerRoute(
@@ -68,8 +76,14 @@ namespace GPS.ApplicationManager.Web
         if (env.IsDevelopment())
         {
           spa.UseAngularCliServer(npmScript: "start");
-        }
+              app.UseSwagger();
+              app.UseSwaggerUI((options) =>
+              {
+                  options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+              });
+          }
       });
+
     }
   }
 }
