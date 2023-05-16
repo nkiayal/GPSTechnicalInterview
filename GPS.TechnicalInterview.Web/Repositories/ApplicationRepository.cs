@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using GPS.ApplicationManager.Web.Models;
+
+namespace GPS.ApplicationManager.Web.Repositories;
 
 public class ApplicationRepository
 {

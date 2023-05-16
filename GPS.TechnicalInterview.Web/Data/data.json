@@ -1,0 +1,1 @@
+[{"ApplicationNumber":"0","LoanTerms":{"Amount":100.0,"MonthlyPaymentAmount":50.0,"Term":2},"PersonalInformation":{"Name":{"First":"John","Last":"Doe"},"PhoneNumber":"123-456-7890","Email":"hello@world.com"},"DateApplied":"2023-05-16T00:00:00","Status":0}]

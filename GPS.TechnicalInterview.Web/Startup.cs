@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using GPS.ApplicationManager.Web.Repositories;
 
 namespace GPS.ApplicationManager.Web
 {
@@ -57,6 +58,12 @@ namespace GPS.ApplicationManager.Web
         endpoints.MapControllerRoute(
                   name: "default",
                   pattern: "{controller}/{action=Index}/{id?}");
+      });
+
+      // Add the API endpoint middleware
+      app.UseEndpoints(endpoints =>
+      {
+        endpoints.MapControllers(); // Map API controllers
       });
 
       app.UseSpa(spa =>

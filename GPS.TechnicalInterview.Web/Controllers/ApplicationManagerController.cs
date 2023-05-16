@@ -2,11 +2,13 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using GPS.ApplicationManager.Web.Models;
+using GPS.ApplicationManager.Web.Repositories;
 
 namespace GPS.ApplicationManager.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ApplicationManagerController : ControllerBase
     {
         private readonly ILogger<ApplicationManagerController> _logger;
