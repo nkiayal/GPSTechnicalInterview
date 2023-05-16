@@ -21,6 +21,7 @@ namespace GPS.ApplicationManager.Web
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      services.AddSingleton<ApplicationRepository>(new ApplicationRepository("./data/data.json"));
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
       {
