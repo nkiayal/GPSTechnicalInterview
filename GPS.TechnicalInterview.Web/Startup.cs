@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using GPS.ApplicationManager.Web.Repositories;
 
 namespace GPS.ApplicationManager.Web
 {
@@ -21,6 +22,7 @@ namespace GPS.ApplicationManager.Web
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      services.AddSingleton<ApplicationRepository>(new ApplicationRepository("./data/data.json"));
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
       {
@@ -56,6 +58,12 @@ namespace GPS.ApplicationManager.Web
         endpoints.MapControllerRoute(
                   name: "default",
                   pattern: "{controller}/{action=Index}/{id?}");
+      });
+
+      // Add the API endpoint middleware
+      app.UseEndpoints(endpoints =>
+      {
+        endpoints.MapControllers(); // Map API controllers
       });
 
       app.UseSpa(spa =>
