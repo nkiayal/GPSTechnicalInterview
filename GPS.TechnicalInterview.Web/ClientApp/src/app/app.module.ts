@@ -2,8 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { MatIconModule } from "@angular/material/icon";
-import { MatMenuModule } from "@angular/material/menu";
 
 import { AppComponent } from "./app.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
@@ -13,9 +11,8 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./shared/material.module";
 import { ApplicationsComponent } from "./applications/applications.component";
 import { StatusPipe } from "./pipes/status.pipe";
-import { MatFormField } from "@angular/material/form-field";
 import { WarningComponent } from "./dialogs/warning/warning.component";
-import { MatDialogModule } from "@angular/material/dialog";
+import { SnackBar } from "./shared/ux-components/snack-bar/snack-bar.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +22,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     CreateApplicationComponent,
     StatusPipe,
     WarningComponent,
+    SnackBar,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -34,11 +32,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     AppRoutingModule,
     NoopAnimationsModule,
     MaterialModule,
-    MatIconModule,
-    MatMenuModule,
-    MatDialogModule,
   ],
-  providers: [],
+  providers: [SnackBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
