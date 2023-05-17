@@ -1,33 +1,48 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Application } from "./Interfaces/applications.interface";
 
+const headers = new HttpHeaders().set("content-type", "application/json");
+const BASE_URL = "api/ApplicationManager";
 @Injectable({ providedIn: "root" })
 export class ApiService {
-  private apiUrl = "api/ApplicationManager";
-
   constructor(private http: HttpClient) {}
 
-  getAllApplications() {
-    return this.http.get<Application[]>(this.apiUrl);
+  async getAllApplications() {
+    return this.http
+      .get<Application[]>(BASE_URL, { headers: headers })
+      .toPromise();
   }
 
-  getApplication(applicationNumber: string) {
-    return this.http.get<Application>(`${this.apiUrl}/${applicationNumber}`);
+  async getApplication(applicationNumber: string) {
+    return this.http
+      .get<Application>(`${BASE_URL}/${applicationNumber}`, {
+        headers: headers,
+      })
+      .toPromise();
   }
 
-  createApplication(application: Application) {
-    return this.http.post<Application>(this.apiUrl, application);
+  async createApplication(application: Application) {
+    return this.http
+      .post<Application>(BASE_URL, application, {
+        headers: headers,
+      })
+      .toPromise();
   }
 
-  updateApplication(applicationNumber: string, application: Application) {
-    return this.http.put<Application>(
-      `${this.apiUrl}/${applicationNumber}`,
-      application
-    );
+  async updateApplication(applicationNumber: string, application: Application) {
+    return this.http
+      .put<Application>(`${BASE_URL}/${applicationNumber}`, application, {
+        headers: headers,
+      })
+      .toPromise();
   }
 
-  deleteApplication(applicationNumber: string) {
-    return this.http.delete(`${this.apiUrl}/${applicationNumber}`);
+  async deleteApplication(applicationNumber: string) {
+    return this.http
+      .delete(`${BASE_URL}/${applicationNumber}`, {
+        headers: headers,
+      })
+      .toPromise();
   }
 }

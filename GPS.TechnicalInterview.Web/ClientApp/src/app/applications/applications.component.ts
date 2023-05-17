@@ -1,33 +1,44 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Injectable, ViewChild } from "@angular/core";
 import { ApiService } from "../api.service";
 import { Application } from "../Interfaces/applications.interface";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-applications",
   templateUrl: "./applications.component.html",
   styleUrls: ["./applications.component.scss"],
 })
+@Injectable()
 export class ApplicationsComponent implements OnInit {
-  allApplications: Application[] = [];
+  // @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+  allApplications: Application[];
 
   public displayedColumns: Array<string> = [
     "applicationNumber",
     "amount",
     "dateApplied",
     "status",
+    "menu",
   ];
 
-  constructor(private apiService: ApiService) {
-    this.apiService
-      .getAllApplications()
-      .subscribe((data: Application[]) => (data = this.allApplications));
+  constructor(private apiService: ApiService, private router: Router) {}
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.allApplications = await this.apiService.getAllApplications();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  ngOnInit(): void {
-    console.log(this.allApplications);
-    console.log(this.allApplications.toString());
-    for (let item of this.allApplications) {
-      console.log(item);
-    }
+  onEditClicked(application: Application) {
+    this.router.navigate(["/edit-application"], {
+      queryParams: { appNumber: application.applicationNumber },
+    });
+  }
+
+  onDeleteClicked(application: Application) {
+    console.log(application.applicationNumber);
   }
 }
