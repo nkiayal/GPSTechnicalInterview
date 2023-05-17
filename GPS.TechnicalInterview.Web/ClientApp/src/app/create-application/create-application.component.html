@@ -47,7 +47,7 @@
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Status</mat-label>
               <mat-select formControlName="status">
-                  <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+                  <mat-option *ngFor="let status of statuses" [value]="status">{{ status | status }}</mat-option>
               </mat-select>
               </mat-form-field>
           </div>
@@ -78,7 +78,7 @@
       <hr />
     </form>
     <mat-card-actions class="details-buttons">
-      <button mat-button color="primary">SAVE</button>
+      <button mat-button color="primary" (click)="onSaveClicked()">SAVE</button>
     </mat-card-actions>
 </mat-card>
 </section>

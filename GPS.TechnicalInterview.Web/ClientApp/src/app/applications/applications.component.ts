@@ -39,6 +39,6 @@ export class ApplicationsComponent implements OnInit {
   }
 
   onDeleteClicked(application: Application) {
-    console.log(application.applicationNumber);
+
   }
 }
