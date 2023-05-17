@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Application } from "./Interfaces/applications.interface";
+import { Application } from "./interfaces/applications.interface";
 
 const headers = new HttpHeaders().set("content-type", "application/json");
 const BASE_URL = "api/ApplicationManager";

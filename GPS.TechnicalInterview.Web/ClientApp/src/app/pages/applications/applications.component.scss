@@ -85,7 +85,7 @@
 
     tr.table-row:not(.expanded-row):hover,
     tr.table-row:not(.expanded-row):active {
-      background: #FAFAFA;
+      background: #fafafa;
     }
 
     tr.mat-header-row {
@@ -94,7 +94,7 @@
     }
 
     .mat-header-cell {
-      color: rgba(0, 0, 0, .55);
+      color: rgba(0, 0, 0, 0.55);
       font-weight: 500;
     }
 
@@ -103,7 +103,11 @@
     }
 
     th.mat-header-cell:first-of-type {
-        padding-left: 1rem;
+      padding-left: 1rem;
+    }
+
+    .mat-column-menu {
+      width: 25px;
     }
   }
 }

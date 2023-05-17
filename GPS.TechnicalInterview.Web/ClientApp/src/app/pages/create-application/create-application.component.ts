@@ -6,10 +6,10 @@ import {
   ValidationErrors,
   Validators,
 } from "@angular/forms";
-import { ApiService } from "../api.service";
+import { ApiService } from "../../api.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Application } from "../Interfaces/applications.interface";
-import { SnackBar } from "../shared/ux-components/snack-bar/snack-bar.component";
+import { Application } from "../../interfaces/applications.interface";
+import { SnackBar } from "../../shared/ux-components/snack-bar/snack-bar.component";
 
 @Component({
   selector: "app-create-application",
@@ -93,7 +93,6 @@ export class CreateApplicationComponent implements OnInit {
     const amount = this.applicationForm.get("amount")?.value;
     const term = this.applicationForm.get("terms")?.value;
     const monthlyPayAmount = amount / term;
-    console.log(monthlyPayAmount);
 
     if (isNaN(monthlyPayAmount) || monthlyPayAmount === Infinity) return;
 
@@ -128,9 +127,7 @@ export class CreateApplicationComponent implements OnInit {
       status: formData.status,
     };
     if (this.newApplication) {
-      this.apiService.createApplication(applicationData).then((response) => {
-        console.log("Application created", response);
-      });
+      this.apiService.createApplication(applicationData).then((response) => {});
       this.snackBar.openSnackBar("Created successfully", "OK");
     } else {
       this.apiService.updateApplication(

@@ -1,9 +1,9 @@
 import { Component, OnInit, Injectable, ViewChild } from "@angular/core";
-import { ApiService } from "../api.service";
-import { Application } from "../Interfaces/applications.interface";
+import { ApiService } from "../../api.service";
+import { Application } from "../../interfaces/applications.interface";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
-import { WarningComponent } from "../dialogs/warning/warning.component";
+import { WarningComponent } from "../../dialogs/warning-dialog/warning.component";
 
 @Component({
   selector: "app-applications",
@@ -55,7 +55,7 @@ export class ApplicationsComponent implements OnInit {
 
   onDeleteClicked(application: Application): void {
     const dialogRef = this.dialog.open(WarningComponent, {
-      width: "400px",
+      width: "600px",
       data: { applicationNumber: application.applicationNumber },
     });
 
