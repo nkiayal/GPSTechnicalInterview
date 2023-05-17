@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { ApplicationsComponent } from './applications/applications.component';
+import { StoreModule } from '@ngrx/store';
+import { loanReducer } from './store/loan.actions';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ApplicationsComponent } from './applications/applications.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    StoreModule.forRoot({ loanRecords: loanReducer }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
