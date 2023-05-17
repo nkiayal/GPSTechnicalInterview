@@ -1,3 +1,5 @@
 .vs
 Debug
-/GPS.TechnicalInterview.Web/obj
+/GPS.TechnicalInterview.Web
+node_modules
+cache
