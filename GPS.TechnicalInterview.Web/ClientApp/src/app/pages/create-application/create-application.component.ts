@@ -40,9 +40,9 @@ export class CreateApplicationComponent implements OnInit {
       email: [null, Validators.email],
       applicationNumber: [null, Validators.required],
       status: [0],
-      amount: [null, (Validators.required, this.validateNumber())],
+      amount: [null, [Validators.required, this.validateNumber()]],
       monthlyPayAmount: [null],
-      terms: [null, (Validators.required, this.validateNumber())],
+      terms: [null, [Validators.required, this.validateNumber()]],
     });
   }
 
