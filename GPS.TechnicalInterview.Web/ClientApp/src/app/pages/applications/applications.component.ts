@@ -4,6 +4,7 @@ import { Application } from "../../interfaces/applications.interface";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { WarningComponent } from "../../dialogs/warning-dialog/warning.component";
+import { ErrorDialogComponent } from "src/app/dialogs/error-dialog/error-dialog.component";
 
 @Component({
   selector: "app-applications",
@@ -33,17 +34,30 @@ export class ApplicationsComponent implements OnInit {
   }
 
   loadApplications(): void {
-    this.apiService
-      .getAllApplications()
-      .subscribe((applications) => (this.allApplications = applications));
+    this.apiService.getAllApplications().subscribe(
+      (applications: Application[]) => {
+        this.allApplications = applications;
+      },
+      (err: any) => {
+        this.dialog.open(ErrorDialogComponent, {
+          width: "600px",
+          data: { error: err },
+        });
+      }
+    );
   }
 
   async deleteApplication(application: Application): Promise<void> {
     try {
-      await this.apiService.deleteApplication(application.applicationNumber);
+      await this.apiService
+        .deleteApplication(application.applicationNumber)
+        .toPromise();
       this.loadApplications();
     } catch (err) {
-      console.log(err);
+      this.dialog.open(ErrorDialogComponent, {
+        width: "600px",
+        data: { error: err },
+      });
     }
   }
 

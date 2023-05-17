@@ -1,46 +1,74 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Application } from "./interfaces/applications.interface";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 
-const headers = new HttpHeaders().set("content-type", "application/json");
-const BASE_URL = "api/ApplicationManager";
 @Injectable({ providedIn: "root" })
 export class ApiService {
+  private readonly BASE_URL = "api/ApplicationManager";
+  private readonly headers = new HttpHeaders().set(
+    "content-type",
+    "application/json"
+  );
+
   constructor(private http: HttpClient) {}
 
-  getAllApplications() {
-    return this.http.get<Application[]>(BASE_URL, { headers: headers });
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = `Something bad happened`;
+    if (error.error instanceof ErrorEvent) {
+      // client-side
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 
-  async getApplication(applicationNumber: string) {
+  getAllApplications(): Observable<Application[]> {
     return this.http
-      .get<Application>(`${BASE_URL}/${applicationNumber}`, {
-        headers: headers,
-      })
-      .toPromise();
+      .get<Application[]>(this.BASE_URL, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 
-  async createApplication(application: Application) {
+  getApplication(applicationNumber: string): Observable<Application> {
     return this.http
-      .post<Application>(BASE_URL, application, {
-        headers: headers,
+      .get<Application>(`${this.BASE_URL}/${applicationNumber}`, {
+        headers: this.headers,
       })
-      .toPromise();
+      .pipe(catchError(this.handleError));
   }
 
-  async updateApplication(applicationNumber: string, application: Application) {
+  createApplication(application: Application): Observable<Application> {
     return this.http
-      .put<Application>(`${BASE_URL}/${applicationNumber}`, application, {
-        headers: headers,
+      .post<Application>(this.BASE_URL, application, {
+        headers: this.headers,
       })
-      .toPromise();
+      .pipe(catchError(this.handleError));
   }
 
-  async deleteApplication(applicationNumber: string) {
+  updateApplication(
+    applicationNumber: string,
+    application: Application
+  ): Observable<Application> {
     return this.http
-      .delete(`${BASE_URL}/${applicationNumber}`, {
-        headers: headers,
+      .put<Application>(`${this.BASE_URL}/${applicationNumber}`, application, {
+        headers: this.headers,
       })
-      .toPromise();
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteApplication(applicationNumber: string): Observable<void | object> {
+    return this.http
+      .delete(`${this.BASE_URL}/${applicationNumber}`, {
+        headers: this.headers,
+      })
+      .pipe(catchError(this.handleError));
   }
 }

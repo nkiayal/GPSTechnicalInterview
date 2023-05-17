@@ -13,6 +13,7 @@ import { ApplicationsComponent } from "./pages/applications/applications.compone
 import { StatusPipe } from "./pipes/status.pipe";
 import { WarningComponent } from "./dialogs/warning-dialog/warning.component";
 import { SnackBar } from "./shared/ux-components/snack-bar/snack-bar.component";
+import { ErrorDialogComponent } from "./dialogs/error-dialog/error-dialog.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SnackBar } from "./shared/ux-components/snack-bar/snack-bar.component";
     StatusPipe,
     WarningComponent,
     SnackBar,
+    ErrorDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

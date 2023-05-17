@@ -10,6 +10,8 @@ import { ApiService } from "../../api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Application } from "../../interfaces/applications.interface";
 import { SnackBar } from "../../shared/ux-components/snack-bar/snack-bar.component";
+import { MatDialog } from "@angular/material/dialog";
+import { ErrorDialogComponent } from "src/app/dialogs/error-dialog/error-dialog.component";
 
 @Component({
   selector: "app-create-application",
@@ -28,7 +30,8 @@ export class CreateApplicationComponent implements OnInit {
     private apiService: ApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: SnackBar
+    private snackBar: SnackBar,
+    public dialog: MatDialog
   ) {
     this.applicationForm = this.formBuilder.group({
       firstName: [null, Validators.required],
@@ -57,9 +60,9 @@ export class CreateApplicationComponent implements OnInit {
 
   async loadApplication(): Promise<void> {
     try {
-      const applicationData = await this.apiService.getApplication(
-        this.applicationNumber
-      );
+      const applicationData: Application = await this.apiService
+        .getApplication(this.applicationNumber)
+        .toPromise();
       this.applicationForm.patchValue({
         firstName: applicationData.personalInformation.name.first,
         lastName: applicationData.personalInformation.name.last,
@@ -73,7 +76,10 @@ export class CreateApplicationComponent implements OnInit {
       });
       this.applicationForm.get("applicationNumber")?.disable();
     } catch (err) {
-      console.log(err);
+      this.dialog.open(ErrorDialogComponent, {
+        width: "600px",
+        data: { error: err },
+      });
     }
   }
 
@@ -101,7 +107,7 @@ export class CreateApplicationComponent implements OnInit {
     });
   }
 
-  async onSaveClicked() {
+  onSaveClicked() {
     if (this.applicationForm.invalid) {
       this.applicationForm.markAllAsTouched();
       return;
@@ -126,17 +132,40 @@ export class CreateApplicationComponent implements OnInit {
       dateApplied: new Date(),
       status: formData.status,
     };
+
     if (this.newApplication) {
-      this.apiService.createApplication(applicationData).then((response) => {});
-      this.snackBar.openSnackBar("Created successfully", "OK");
+      this.createApplication(applicationData);
     } else {
-      this.apiService.updateApplication(
-        this.applicationNumber,
-        applicationData
-      );
-      this.snackBar.openSnackBar("Saved successfully", "OK");
+      this.updateApplication(applicationData);
     }
-    this.router.navigate(["/"]);
+  }
+
+  async createApplication(application: Application): Promise<void> {
+    try {
+      await this.apiService.createApplication(application).toPromise();
+      this.snackBar.openSnackBar("Created successfully", "OK");
+      this.router.navigate(["/"]);
+    } catch (err) {
+      this.dialog.open(ErrorDialogComponent, {
+        width: "600px",
+        data: { error: err },
+      });
+    }
+  }
+
+  async updateApplication(application: Application): Promise<void> {
+    try {
+      await this.apiService
+        .updateApplication(this.applicationNumber, application)
+        .toPromise();
+      this.snackBar.openSnackBar("Saved successfully", "OK");
+      this.router.navigate(["/"]);
+    } catch (err) {
+      this.dialog.open(ErrorDialogComponent, {
+        width: "600px",
+        data: { error: err },
+      });
+    }
   }
 
   validatePhoneNumber() {

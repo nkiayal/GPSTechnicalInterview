@@ -1,1 +1,7 @@
-<p>error-dialog works!</p>
+<h1 mat-dialog-title>Error</h1>
+<div mat-dialog-content>
+  <p>{{ data.error }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseClicked()">Close</button>
+</div>
