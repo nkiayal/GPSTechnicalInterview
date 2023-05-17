@@ -35,7 +35,7 @@ export class CreateApplicationComponent implements OnInit {
     });
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.applicationNumber = params["appNumber"];
     });

@@ -1,1 +1,1 @@
-[{"ApplicationNumber":"0","LoanTerms":{"Amount":100.0,"MonthlyPaymentAmount":50.0,"Term":2},"PersonalInformation":{"Name":{"First":"John","Last":"Doe"},"PhoneNumber":"123-456-7890","Email":"hello@world.com"},"DateApplied":"2023-05-16T00:00:00","Status":0}]
+[{"ApplicationNumber":"1234567890","LoanTerms":{"Amount":500.0,"MonthlyPaymentAmount":100.0,"Term":5},"PersonalInformation":{"Name":{"First":"Jason","Last":"Edman"},"PhoneNumber":"3073899308","Email":"jason.e24@gmail.com"},"DateApplied":"2023-05-17T14:06:28.802Z","Status":1}]

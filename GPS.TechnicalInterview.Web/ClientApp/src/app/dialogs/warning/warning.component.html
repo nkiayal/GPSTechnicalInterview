@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete Application</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete: #{{ data.applicationNumber }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClicked()">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+</div>

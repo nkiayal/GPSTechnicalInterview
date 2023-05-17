@@ -8,10 +8,8 @@ const BASE_URL = "api/ApplicationManager";
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  async getAllApplications() {
-    return this.http
-      .get<Application[]>(BASE_URL, { headers: headers })
-      .toPromise();
+  getAllApplications() {
+    return this.http.get<Application[]>(BASE_URL, { headers: headers });
   }
 
   async getApplication(applicationNumber: string) {
