@@ -127,3 +127,24 @@
   padding-top: 0;
   padding-bottom: 0 !important;
 }
+
+::ng-deep .custom-warning {
+    color: red;
+}
+
+::ng-deep button.mat-menu-item {
+    display: flex;
+    justify-content: space-between;
+
+    &.mat-focus-indicator:hover {
+        background-color: rgba(38, 50, 56, 0.5);
+
+        mat-icon.mat-icon {
+            color: #fff;
+        }
+    }
+
+    mat-icon.mat-icon {
+        margin: 10px 0px;
+    }
+}

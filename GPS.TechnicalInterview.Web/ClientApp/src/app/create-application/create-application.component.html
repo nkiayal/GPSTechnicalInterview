@@ -1,4 +1,4 @@
-<app-nav-menu></app-nav-menu>
+<app-nav-menu [routeMode]="mode$ | async"></app-nav-menu>
 <section class="application-details">
   <mat-card class="section-details">
     <mat-card-title class="section-details-title">Personal Information</mat-card-title>
@@ -78,6 +78,7 @@
       <hr />
     </form>
     <mat-card-actions class="details-buttons">
+        <button mat-button color="warn" [routerLink]="['/applications']">CANCEL</button>
       <button mat-button color="primary">SAVE</button>
     </mat-card-actions>
 </mat-card>

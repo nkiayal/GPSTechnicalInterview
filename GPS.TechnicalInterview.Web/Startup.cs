@@ -1,6 +1,6 @@
+using GPS.ApplicationManager.Web.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace GPS.ApplicationManager.Web
 {
-  public class Startup
+    public class Startup
   {
     public Startup(IConfiguration configuration)
     {
@@ -22,6 +22,7 @@ namespace GPS.ApplicationManager.Web
     {
       services.AddControllersWithViews();
       // In production, the Angular files will be served from this directory
+      services.AddSingleton<DataManagerController>(new DataManagerController("./data/mock-data.json"));
       services.AddSpaStaticFiles(configuration =>
       {
         configuration.RootPath = "ClientApp/dist";
