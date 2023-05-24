@@ -70,7 +70,7 @@
           <div class="input-wrap" id="lastInput">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Terms *</mat-label>
-              <input matInput formControlName="terms" placeholder="Terms *">
+              <input matInput formControlName="term" placeholder="Terms *">
             </mat-form-field>
           </div>
         </div>
@@ -79,7 +79,7 @@
     </form>
     <mat-card-actions class="details-buttons">
         <button mat-button color="warn" [routerLink]="['/applications']">CANCEL</button>
-      <button mat-button color="primary">SAVE</button>
+      <button mat-button color="primary" (click)="submitForm()">SAVE</button>
     </mat-card-actions>
 </mat-card>
 </section>

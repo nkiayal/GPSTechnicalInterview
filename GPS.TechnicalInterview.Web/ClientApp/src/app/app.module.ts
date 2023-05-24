@@ -12,6 +12,7 @@ import { APP_EFFECTS } from './store';
 //Modules
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './shared/material.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -40,7 +41,8 @@ import { ApplicationFormService } from './shared/services/applicationForm.servic
           maxAge: 100
       }),
       EffectsModule.forRoot(APP_EFFECTS),
-    HttpClientModule,
+      HttpClientModule,
+      MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
