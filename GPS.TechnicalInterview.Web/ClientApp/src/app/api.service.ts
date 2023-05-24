@@ -37,9 +37,9 @@ export class ApiService {
             .pipe(catchError(this.handleError));
     }
 
-    updateLoanRecord( applicationNumber: string, record: ILoanApplication): Observable<ILoanApplication> {
-        return this.http
-            .put<ILoanApplication>(`${this.LOAN_BASE_URL}/${applicationNumber}`, record, {
+    updateLoanRecord(application: ILoanApplication): Observable<ILoanApplication> {
+        let { applicationNumber } = application;
+        return this.http.put<ILoanApplication>(`${this.LOAN_BASE_URL}/${applicationNumber}`, application, {
                 headers: this.headers,
             })
             .pipe(catchError(this.handleError));

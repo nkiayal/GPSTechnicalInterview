@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GPS.ApplicationManager.Web.Controllers
 {
-    [ApiController]
+  [ApiController]
   [Route("api/[controller]")]
   public class ApplicationManagerController : ControllerBase
   {
@@ -65,7 +65,7 @@ namespace GPS.ApplicationManager.Web.Controllers
 
                 application.ApplicationNumber = existingApplication.ApplicationNumber;
                 _mockDB.Update(application);
-                return NoContent();
+                return Ok(application);
             }
 
             return BadRequest(ModelState);

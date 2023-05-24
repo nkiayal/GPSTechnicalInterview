@@ -1,14 +1,14 @@
 import { AfterViewInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, UrlSegment } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { FormMode } from '../shared/models/form.model';
 import { ApplicationFormService } from '../shared/services/applicationForm.service';
-import { CreateApplication, LoadApplication } from '../store/actions/application.actions';
+import { CreateApplication, LoadApplication, UpdateApplication } from '../store/actions/application.actions';
 import { applicationRecord } from '../store/selectors/application.selector';
 
 @Component({
@@ -88,6 +88,7 @@ export class CreateApplicationComponent implements AfterViewInit {
             
             let formattedData = data ? this.applicationFormService.dataToForm(data) : {};
             this.applicationForm.patchValue({
+                applicationNumber: this.id,
                 ...formattedData
             })
         });
@@ -97,6 +98,10 @@ export class CreateApplicationComponent implements AfterViewInit {
         
         let formattedData = this.applicationFormService.mapFormToData(this.applicationForm.value);
         if (this.formMode == 'create') this.store.dispatch(new CreateApplication(formattedData))
+        else {
+            formattedData.applicationNumber = this.id;
+            this.store.dispatch(new UpdateApplication(formattedData))
+        }
     }
 
 }
