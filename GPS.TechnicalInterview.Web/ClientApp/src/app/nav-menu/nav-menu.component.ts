@@ -1,5 +1,9 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,17 +12,35 @@ import { Router } from '@angular/router';
 })
 export class NavMenuComponent implements OnInit {
 
-  public headerTitle: string = '';
-  public currentRoute: string = '';
+    public headerTitle: string = '';
+    public currentRoute: string = '';
+    public dataID: string = '';
+    public routeID$: Observable<any>;
 
-  constructor(private router: Router) {}
-  ngOnInit(): void {
+    @Input()
+    public routeMode: string = ''
 
-    this.currentRoute = this.router.url;
-    if (this.currentRoute === '/create-application') {
-      this.headerTitle = 'Create Application';
-    } else {
-      this.headerTitle = 'Application Manager';
+    constructor(private router: Router, public route: ActivatedRoute) {
+        this.routeID$ = route.url;
     }
-  }
+    ngOnInit(): void {
+        switch (this.routeMode) {
+            case 'create': {
+                this.headerTitle = 'Create Application';
+                break;
+            }
+            case 'edit': {
+                this.routeID$.pipe(
+                    take(1),
+                    map((url) => this.dataID = url[url.length - 1].path)
+                ).subscribe();
+                this.headerTitle = 'Edit Application: ' + this.dataID;
+                break;
+            }
+            default: {
+                this.headerTitle = 'Application Manager';
+                break;
+            }
+        }
+    }
 }
