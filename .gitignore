@@ -1,0 +1,10 @@
+# Editor
+.vscode/
+
+# Client
+.angular/
+node_modules/
+
+# Server
+bin/
+obj/
