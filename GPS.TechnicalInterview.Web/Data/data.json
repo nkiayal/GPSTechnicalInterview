@@ -3,19 +3,37 @@
     {
       "applicationNumber": "asdf",
       "loanTerms": {
-        "amount": 1.0,
-        "monthlyPaymentAmount": 1.0,
+        "amount": 100.0,
+        "monthlyPaymentAmount": 25.0,
         "term": 1
       },
       "personalInformation": {
         "name": {
-          "first": "asdf",
-          "last": "asdf"
+          "first": "Bunderkin",
+          "last": "Barnes"
         },
-        "phoneNumber": "asdf",
-        "email": "asdf"
+        "phoneNumber": "5555555555",
+        "email": "billiam@barnes.com"
       },
-      "dateApplied": "2023-06-01T00:15:54.577Z",
+      "dateApplied": "0001-01-01T00:00:00",
+      "status": 0
+    },
+    {
+      "applicationNumber": "123456",
+      "loanTerms": {
+        "amount": 100.0,
+        "monthlyPaymentAmount": 25.0,
+        "term": 1
+      },
+      "personalInformation": {
+        "name": {
+          "first": "Bunderkin",
+          "last": "Barnes"
+        },
+        "phoneNumber": "5555555555",
+        "email": "billiam@barnes.com"
+      },
+      "dateApplied": "0001-01-01T00:00:00",
       "status": 0
     }
   ]

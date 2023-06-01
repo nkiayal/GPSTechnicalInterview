@@ -29,9 +29,9 @@ public class Store
     await applicationCollection.InsertOneAsync(data);
   }
 
-  public async void updateApplication(Application data)
+  public async void updateApplication(string applicationNumber, Application data)
   {
-    await applicationCollection.UpdateOneAsync(a => a.ApplicationNumber == data.ApplicationNumber, data);
+    await applicationCollection.UpdateOneAsync(a => a.ApplicationNumber == applicationNumber, data);
   }
 
   public async void deleteApplication(string applicationNumber)
