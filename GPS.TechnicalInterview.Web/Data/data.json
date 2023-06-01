@@ -1,0 +1,22 @@
+{
+  "applications": [
+    {
+      "applicationNumber": "asdf",
+      "loanTerms": {
+        "amount": 1.0,
+        "monthlyPaymentAmount": 1.0,
+        "term": 1
+      },
+      "personalInformation": {
+        "name": {
+          "first": "asdf",
+          "last": "asdf"
+        },
+        "phoneNumber": "asdf",
+        "email": "asdf"
+      },
+      "dateApplied": "2023-06-01T00:15:54.577Z",
+      "status": 0
+    }
+  ]
+}
