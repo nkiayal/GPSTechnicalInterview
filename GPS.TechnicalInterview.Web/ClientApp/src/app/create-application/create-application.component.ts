@@ -35,7 +35,9 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
       .subscribe(amount => {
         console.log('amount changed: ', amount);
         const terms = this.applicationForm.get('terms').value;
-        this.applicationForm.get('monthlyPayAmount').setValue(parseFloat(amount) / parseFloat(terms));
+        if (amount && terms) {
+          this.applicationForm.get('monthlyPayAmount').setValue(parseFloat(amount) / parseFloat(terms));
+        }
       });
 
     this.applicationForm
@@ -44,7 +46,9 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
       .subscribe(terms => {
         console.log('terms changed: ', terms);
         const amount = this.applicationForm.get('amount').value;
-        this.applicationForm.get('monthlyPayAmount').setValue(parseFloat(amount) / parseFloat(terms));
+        if (amount && terms) {
+          this.applicationForm.get('monthlyPayAmount').setValue(parseFloat(amount) / parseFloat(terms));
+        }
       });
   }
 
