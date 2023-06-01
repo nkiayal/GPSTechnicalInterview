@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-application',
@@ -12,23 +13,50 @@ import { takeUntil, debounceTime } from 'rxjs/operators';
 export class CreateApplicationComponent implements OnInit, OnDestroy {
   public statuses: Array<string> = ['New', 'Approved', 'Funded'];
 
+  private editing = '';
   private destroy$ = new Subject();
 
   public applicationForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl('', [Validators.pattern('[0-9]{9}]')]),
+    phoneNumber: new FormControl('', [Validators.pattern(/^([0-9]{9})$/)]),
     email: new FormControl('', [Validators.email]),
     applicationNumber: new FormControl('', [Validators.required]),
     status: new FormControl('New'),
-    amount: new FormControl(0, [Validators.required]),
-    monthlyPayAmount: new FormControl({ value: 0, disabled: true }),
-    terms: new FormControl(0, [Validators.required]),
+    amount: new FormControl('', [Validators.required]),
+    monthlyPayAmount: new FormControl({ value: '', disabled: true }),
+    terms: new FormControl('', [Validators.required]),
   });
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+      if (params.edit) {
+        this.api.getApplication(params.edit).subscribe(application => {
+          console.log(application);
+
+          if (application) {
+            this.editing = params.edit;
+            this.applicationForm.get('applicationNumber').disable();
+
+            this.applicationForm.setValue({
+              firstName: application.personalInformation.name.first,
+              lastName: application.personalInformation.name.last,
+              phoneNumber: application.personalInformation.phoneNumber,
+              email: application.personalInformation.email,
+              applicationNumber: application.applicationNumber,
+              status: this.statuses[application.status],
+              amount: application.loanTerms.amount,
+              monthlyPayAmount: application.loanTerms.monthlyPaymentAmount,
+              terms: application.loanTerms.term,
+            });
+          }
+        });
+      }
+    });
+
     this.applicationForm
       .get('amount')
       .valueChanges.pipe(debounceTime(1000), takeUntil(this.destroy$))
@@ -84,6 +112,13 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
     };
 
     console.log(application);
+
+    if (this.editing) {
+      this.api.updateApplication(this.editing, application).subscribe(response => {
+        console.log(response);
+      });
+      return;
+    }
 
     this.api.createApplication(application).subscribe(response => {
       console.log(response);

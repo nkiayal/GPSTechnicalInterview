@@ -12,8 +12,11 @@ export class ApiService {
     return this.http.get<Application[]>(this.baseUrl + 'api/applicationmanager').pipe(catchError(this.handleError));
   }
 
-  getApplication(applicationNumber: string): Observable<Application[]> {
-    return this.http.get<Application[]>(this.baseUrl + `api/applicationmanager/${applicationNumber}`).pipe(catchError(this.handleError));
+  getApplication(applicationNumber: string): Observable<Application> {
+    return this.http.get<Application>(this.baseUrl + `api/applicationmanager/${applicationNumber}`).pipe(
+      map(applications => applications[0]),
+      catchError(this.handleError)
+    );
   }
 
   createApplication(application: Application): Observable<boolean> {
