@@ -1,39 +1,93 @@
 {
   "applications": [
     {
-      "applicationNumber": "asdf",
+      "applicationNumber": "2BCBDA-BB47",
       "loanTerms": {
-        "amount": 100.0,
-        "monthlyPaymentAmount": 25.0,
-        "term": 1
+        "amount": 1000.0,
+        "monthlyPaymentAmount": 0.0,
+        "term": 5
       },
       "personalInformation": {
         "name": {
-          "first": "Bunderkin",
-          "last": "Barnes"
+          "first": "Easy",
+          "last": "Everton"
         },
-        "phoneNumber": "5555555555",
-        "email": "billiam@barnes.com"
+        "phoneNumber": "555555555",
+        "email": "e@e.com"
       },
-      "dateApplied": "0001-01-01T00:00:00",
+      "dateApplied": "2023-06-02T01:08:01.586Z",
       "status": 0
     },
     {
-      "applicationNumber": "123456",
+      "applicationNumber": "07ABED-C820",
       "loanTerms": {
-        "amount": 100.0,
-        "monthlyPaymentAmount": 25.0,
-        "term": 1
+        "amount": 9876.0,
+        "monthlyPaymentAmount": 0.0,
+        "term": 12
       },
       "personalInformation": {
         "name": {
-          "first": "Bunderkin",
-          "last": "Barnes"
+          "first": "Franklin",
+          "last": "Fargate"
         },
-        "phoneNumber": "5555555555",
-        "email": "billiam@barnes.com"
+        "phoneNumber": "",
+        "email": ""
       },
-      "dateApplied": "0001-01-01T00:00:00",
+      "dateApplied": "2023-06-02T01:57:02.387Z",
+      "status": 2
+    },
+    {
+      "applicationNumber": "EAAAEA-8701",
+      "loanTerms": {
+        "amount": 20000.0,
+        "monthlyPaymentAmount": 0.0,
+        "term": 60
+      },
+      "personalInformation": {
+        "name": {
+          "first": "James",
+          "last": "Jaboothy"
+        },
+        "phoneNumber": "444444444",
+        "email": "j@j.com"
+      },
+      "dateApplied": "2023-06-02T01:57:47.011Z",
+      "status": 1
+    },
+    {
+      "applicationNumber": "8EF2D8-2DB1",
+      "loanTerms": {
+        "amount": 9876.0,
+        "monthlyPaymentAmount": 0.0,
+        "term": 60
+      },
+      "personalInformation": {
+        "name": {
+          "first": "Patrick",
+          "last": "Peterson"
+        },
+        "phoneNumber": "",
+        "email": "p@p.com"
+      },
+      "dateApplied": "2023-06-02T01:58:20.027Z",
+      "status": 0
+    },
+    {
+      "applicationNumber": "149C6E-B722",
+      "loanTerms": {
+        "amount": 5678.0,
+        "monthlyPaymentAmount": 0.0,
+        "term": 34
+      },
+      "personalInformation": {
+        "name": {
+          "first": "Timothy",
+          "last": "Talkburger"
+        },
+        "phoneNumber": "888888888",
+        "email": "t@t.com"
+      },
+      "dateApplied": "2023-06-02T02:19:05.475Z",
       "status": 0
     }
   ]
