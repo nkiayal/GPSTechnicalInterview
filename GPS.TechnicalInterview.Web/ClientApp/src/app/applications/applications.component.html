@@ -57,6 +57,6 @@
 <mat-menu #appMenu="matMenu" xPosition="before">
   <ng-template matMenuContent let-applicationNumber="applicationNumber">
     <a mat-menu-item [routerLink]="['/create-application']" [queryParams]="{ edit: applicationNumber }">Edit</a>
-    <button mat-menu-item (click)="openConfirmDialog()">Delete</button>
+    <button mat-menu-item (click)="openConfirmDialog(applicationNumber)">Delete</button>
   </ng-template>
 </mat-menu>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 import { ApiService } from '../api.service';
 import { Application, STATUSES } from '../interfaces/Application';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-applications',
@@ -22,7 +23,7 @@ export class ApplicationsComponent {
     });
   }
 
-  openConfirmDialog() {
+  openConfirmDialog(applicationNumber: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       minWidth: 600,
       data: {
@@ -31,8 +32,20 @@ export class ApplicationsComponent {
       },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: ', result);
+    dialogRef.afterClosed().subscribe(confirm => {
+      console.log('Dialog result: ', confirm);
+      if (confirm) {
+        this.deleteApplication(applicationNumber);
+      }
+    });
+  }
+
+  deleteApplication(applicationNumber: string) {
+    this.api.deleteApplication(applicationNumber).subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.applications = this.applications.filter(app => app.applicationNumber !== applicationNumber);
+      }
     });
   }
 }
