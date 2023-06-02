@@ -8,11 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [MatDialogModule, MatButtonModule],
-  exports: [MatCardModule, MatFormFieldModule, MatTableModule, MatSelectModule, MatInputModule, MatButtonModule, MatMenuModule, MatIconModule, MatDialogModule],
+  exports: [MatCardModule, MatFormFieldModule, MatTableModule, MatSelectModule, MatInputModule, MatButtonModule, MatMenuModule, MatIconModule, MatDialogModule, MatSnackBarModule],
   declarations: [ConfirmDialogComponent],
 })
 export class MaterialModule {}

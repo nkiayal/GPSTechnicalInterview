@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+
+import { ApiService } from '../api.service';
+import { STATUSES } from '../interfaces/Application';
 
 @Component({
   selector: 'app-create-application',
@@ -11,8 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./create-application.component.scss'],
 })
 export class CreateApplicationComponent implements OnInit, OnDestroy {
-  public statuses: Array<string> = ['New', 'Approved', 'Funded'];
-
+  public statuses: Array<string> = STATUSES;
   private editing = '';
   private destroy$ = new Subject();
 
@@ -21,14 +23,14 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
     lastName: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.pattern(/^([0-9]{9})$/)]),
     email: new FormControl('', [Validators.email]),
-    applicationNumber: new FormControl('', [Validators.required]),
+    applicationNumber: new FormControl(this.generateApplicationNumber(), [Validators.required]),
     status: new FormControl('New'),
     amount: new FormControl('', [Validators.required]),
     monthlyPayAmount: new FormControl({ value: '', disabled: true }),
     terms: new FormControl('', [Validators.required]),
   });
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -47,7 +49,7 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
               phoneNumber: application.personalInformation.phoneNumber,
               email: application.personalInformation.email,
               applicationNumber: application.applicationNumber,
-              status: this.statuses[application.status],
+              status: STATUSES[application.status],
               amount: application.loanTerms.amount,
               monthlyPayAmount: application.loanTerms.monthlyPaymentAmount,
               terms: application.loanTerms.term,
@@ -108,7 +110,7 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
         email: email,
       },
       dateApplied: new Date(Date.now()).toISOString(),
-      status: this.statuses.indexOf(status),
+      status: STATUSES.indexOf(status),
     };
 
     console.log(application);
@@ -116,12 +118,26 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
     if (this.editing) {
       this.api.updateApplication(this.editing, application).subscribe(response => {
         console.log(response);
+
+        if (response) {
+          this.snackBar.open('Saved successfully.', 'OK', { panelClass: ['snack-bar-success'] });
+        }
       });
       return;
     }
 
     this.api.createApplication(application).subscribe(response => {
       console.log(response);
+
+      if (response) {
+        this.snackBar.open('Created successfully.', 'OK', { panelClass: ['snack-bar-success'] });
+      }
     });
+  }
+
+  generateApplicationNumber(): string {
+    const S4 = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1).toUpperCase();
+    const S6 = (((1 + Math.random()) * 0x1000000) | 0).toString(16).substring(1).toUpperCase();
+    return S6 + '-' + S4;
   }
 }

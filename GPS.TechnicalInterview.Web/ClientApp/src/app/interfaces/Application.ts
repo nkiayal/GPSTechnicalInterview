@@ -1,3 +1,5 @@
+export const STATUSES: Array<string> = ['New', 'Approved', 'Funded'];
+
 export interface Application {
   applicationNumber: string;
   dateApplied: string;
