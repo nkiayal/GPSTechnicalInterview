@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Application } from '../interfaces/Application';
+import { Application, STATUSES } from '../interfaces/Application';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 
@@ -10,6 +10,7 @@ import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.
   styleUrls: ['./applications.component.scss'],
 })
 export class ApplicationsComponent {
+  public statuses: Array<string> = STATUSES;
   public displayedColumns: Array<string> = ['applicationNumber', 'amount', 'dateApplied', 'status', 'actions'];
 
   public applications: Application[] = [];
