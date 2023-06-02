@@ -24,6 +24,6 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.snack-bar-success .mat-simple-snackbar-action {
-  color: white;
+.snack-bar .mat-simple-snackbar-action {
+  color: #fff;
 }

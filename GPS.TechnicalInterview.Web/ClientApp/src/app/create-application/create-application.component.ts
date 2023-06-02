@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService } from '../api.service';
 import { STATUSES } from '../interfaces/Application';
@@ -16,6 +16,7 @@ import { STATUSES } from '../interfaces/Application';
 export class CreateApplicationComponent implements OnInit, OnDestroy {
   public statuses: Array<string> = STATUSES;
   private editing = '';
+  private applicationDate: string;
   private destroy$ = new Subject();
 
   public applicationForm: FormGroup = new FormGroup({
@@ -30,7 +31,7 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
     terms: new FormControl('', [Validators.required]),
   });
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private snackBar: MatSnackBar) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -41,6 +42,7 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
 
           if (application) {
             this.editing = params.edit;
+            this.applicationDate = application.dateApplied;
             this.applicationForm.get('applicationNumber').disable();
 
             this.applicationForm.setValue({
@@ -109,30 +111,43 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
         phoneNumber: phoneNumber,
         email: email,
       },
-      dateApplied: new Date(Date.now()).toISOString(),
+      dateApplied: this.applicationDate || new Date(Date.now()).toISOString(),
       status: STATUSES.indexOf(status),
     };
 
     console.log(application);
 
     if (this.editing) {
-      this.api.updateApplication(this.editing, application).subscribe(response => {
-        console.log(response);
+      this.api.updateApplication(this.editing, application).subscribe(
+        response => {
+          console.log(response);
 
-        if (response) {
-          this.snackBar.open('Saved successfully.', 'OK', { panelClass: ['snack-bar-success'] });
+          if (response) {
+            this.snackBar.open('Saved successfully.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
+            this.router.navigate(['/applications']);
+          }
+        },
+        error => {
+          console.error(error);
+          this.snackBar.open('Save failed.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
         }
-      });
+      );
       return;
     }
 
-    this.api.createApplication(application).subscribe(response => {
-      console.log(response);
-
-      if (response) {
-        this.snackBar.open('Created successfully.', 'OK', { panelClass: ['snack-bar-success'] });
+    this.api.createApplication(application).subscribe(
+      response => {
+        console.log(response);
+        if (response) {
+          this.snackBar.open('Created successfully.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
+          this.router.navigate(['/applications']);
+        }
+      },
+      error => {
+        console.error(error);
+        this.snackBar.open('Create failed.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
       }
-    });
+    );
   }
 
   generateApplicationNumber(): string {
