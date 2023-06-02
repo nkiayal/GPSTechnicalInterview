@@ -18,7 +18,6 @@ export class ApplicationsComponent {
 
   constructor(private api: ApiService, public dialog: MatDialog) {
     this.api.getAllApplications().subscribe(applications => {
-      console.log(applications);
       this.applications = applications;
     });
   }
@@ -33,7 +32,6 @@ export class ApplicationsComponent {
     });
 
     dialogRef.afterClosed().subscribe(confirm => {
-      console.log('Dialog result: ', confirm);
       if (confirm) {
         this.deleteApplication(applicationNumber);
       }
@@ -42,7 +40,6 @@ export class ApplicationsComponent {
 
   deleteApplication(applicationNumber: string) {
     this.api.deleteApplication(applicationNumber).subscribe(result => {
-      console.log(result);
       if (result) {
         this.applications = this.applications.filter(app => app.applicationNumber !== applicationNumber);
       }

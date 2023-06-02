@@ -35,11 +35,8 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       if (params.edit) {
         this.api.getApplication(params.edit).subscribe(application => {
-          console.log(application);
-
           if (application) {
             this.editing = params.edit;
             this.applicationDate = application.dateApplied;
@@ -65,10 +62,9 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
       .get('amount')
       .valueChanges.pipe(debounceTime(1000), takeUntil(this.destroy$))
       .subscribe(amount => {
-        console.log('amount changed: ', amount);
         const terms = this.applicationForm.get('terms').value;
         if (amount && terms) {
-          this.applicationForm.get('monthlyPayAmount').setValue(parseFloat(amount) / parseFloat(terms));
+          this.applicationForm.get('monthlyPayAmount').setValue((parseFloat(amount) / parseFloat(terms)).toFixed(2));
         }
       });
 
@@ -76,10 +72,9 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
       .get('terms')
       .valueChanges.pipe(debounceTime(1000), takeUntil(this.destroy$))
       .subscribe(terms => {
-        console.log('terms changed: ', terms);
         const amount = this.applicationForm.get('amount').value;
         if (amount && terms) {
-          this.applicationForm.get('monthlyPayAmount').setValue(parseFloat(amount) / parseFloat(terms));
+          this.applicationForm.get('monthlyPayAmount').setValue((parseFloat(amount) / parseFloat(terms)).toFixed(2));
         }
       });
   }
@@ -90,10 +85,6 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log('submitted');
-    console.log(this.applicationForm);
-    console.log(this.applicationForm.value);
-
     const { applicationNumber, amount, email, firstName, lastName, monthlyPayAmount, phoneNumber, status, terms } = this.applicationForm.value;
 
     const application = {
@@ -115,20 +106,15 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
       status: STATUSES.indexOf(status),
     };
 
-    console.log(application);
-
     if (this.editing) {
       this.api.updateApplication(this.editing, application).subscribe(
         response => {
-          console.log(response);
-
           if (response) {
             this.snackBar.open('Saved successfully.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
             this.router.navigate(['/applications']);
           }
         },
-        error => {
-          console.error(error);
+        () => {
           this.snackBar.open('Save failed.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
         }
       );
@@ -137,14 +123,12 @@ export class CreateApplicationComponent implements OnInit, OnDestroy {
 
     this.api.createApplication(application).subscribe(
       response => {
-        console.log(response);
         if (response) {
           this.snackBar.open('Created successfully.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
           this.router.navigate(['/applications']);
         }
       },
-      error => {
-        console.error(error);
+      () => {
         this.snackBar.open('Create failed.', 'OK', { panelClass: ['snack-bar'], duration: 3000 });
       }
     );

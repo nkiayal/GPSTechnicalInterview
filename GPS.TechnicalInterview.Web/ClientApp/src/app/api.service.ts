@@ -41,7 +41,7 @@ export class ApiService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.error('An error occurred: ', error);
-    return throwError(() => new Error('An error occurred. Please try again later'));
+    console.error('A server error occurred: ', error);
+    return throwError(new Error('A server error has occured.'));
   }
 }
