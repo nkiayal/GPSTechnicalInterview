@@ -63,6 +63,7 @@
     th {
       overflow: hidden;
       text-transform: capitalize;
+      width: 25%;
     }
 
     td,
@@ -101,9 +102,9 @@
     td.table-row {
       border-bottom-width: 0;
     }
-
-    th.mat-header-cell:first-of-type {
-        padding-left: 1rem;
+    
+    th.mat-header-cell:last-of-type {
+      width: 40px;
     }
   }
 }

@@ -7,14 +7,16 @@
         <div class="input-wrap-row">
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
-              <mat-label>First Name *</mat-label>
-              <input matInput formControlName="firstName" placeholder="First Name *">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" placeholder="First Name">
+              <mat-error *ngIf="this.applicationForm.controls.firstName.invalid">First Name is required.</mat-error>
             </mat-form-field>
           </div>
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
-              <mat-label>Last Name *</mat-label>
-              <input matInput formControlName="lastName" placeholder="Last Name *">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" placeholder="Last Name">
+              <mat-error *ngIf="this.applicationForm.controls.lastName.invalid">Last Name is required.</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -23,12 +25,14 @@
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Phone Number</mat-label>
               <input matInput formControlName="phoneNumber" placeholder="Phone Number">
+              <mat-error *ngIf="this.applicationForm.controls.phoneNumber.invalid">Phone Number must be 9 digits with no special characters.</mat-error>
             </mat-form-field>
           </div>
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Email</mat-label>
               <input matInput formControlName="email" placeholder="Email">
+              <mat-error *ngIf="this.applicationForm.controls.email.invalid">Email must be a proper email.</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -39,8 +43,9 @@
         <div class="input-wrap-row">
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
-              <mat-label>Application Number *</mat-label>
-              <input matInput formControlName="applicationNumber" placeholder="Application Number *">
+              <mat-label>Application Number</mat-label>
+              <input matInput [readonly]="applicationNumber" formControlName="applicationNumber" placeholder="Application Number">
+              <mat-error *ngIf="this.applicationForm.controls.applicationNumber.invalid">Application Number is required.</mat-error>
             </mat-form-field>
           </div>
           <div class="input-wrap">
@@ -55,22 +60,24 @@
         <div class="input-wrap-row">
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
-              <mat-label>Amount *</mat-label>
-              <input matInput formControlName="amount" placeholder="Amount *">
+              <mat-label>Amount</mat-label>
+              <input matInput formControlName="amount" placeholder="Amount">
+              <mat-error *ngIf="this.applicationForm.controls.amount.invalid">Amount must be a number.</mat-error>
             </mat-form-field>
           </div>
           <div class="input-wrap">
             <mat-form-field appearance="outline" class="input-wrap__input">
               <mat-label>Monthly Payment Amount</mat-label>
-              <input matInput formControlName="monthlyPayAmount" placeholder="Monthly Payment Amount">
+              <input matInput readonly formControlName="monthlyPayAmount" placeholder="Monthly Payment Amount">
             </mat-form-field>
           </div>
         </div>
         <div class="input-wrap-row">
           <div class="input-wrap" id="lastInput">
             <mat-form-field appearance="outline" class="input-wrap__input">
-              <mat-label>Terms *</mat-label>
-              <input matInput formControlName="terms" placeholder="Terms *">
+              <mat-label>Terms</mat-label>
+              <input matInput formControlName="terms" placeholder="Terms">
+              <mat-error *ngIf="this.applicationForm.controls.terms.invalid">Terms must be a number.</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -78,7 +85,7 @@
       <hr />
     </form>
     <mat-card-actions class="details-buttons">
-      <button mat-button color="primary">SAVE</button>
+      <button mat-button color="primary" (click)="onSave()">SAVE</button>
     </mat-card-actions>
 </mat-card>
 </section>

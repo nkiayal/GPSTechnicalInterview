@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using GPS.ApplicationManager.Web.Services;
+
 namespace GPS.ApplicationManager.Web
 {
   public class Startup
@@ -26,6 +28,8 @@ namespace GPS.ApplicationManager.Web
       {
         configuration.RootPath = "ClientApp/dist";
       });
+
+      services.AddSingleton<TempDataService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
