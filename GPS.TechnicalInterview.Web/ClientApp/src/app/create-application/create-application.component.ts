@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../api.service';
 import { Application, LoanStatus } from 'src/models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-application',
@@ -15,6 +16,8 @@ export class CreateApplicationComponent {
   public applicationForm: FormGroup;
   public statuses: Array<string> = ['New', 'Approved', 'Funded'];
   public applicationNumber?: string;
+  private _amountSubscription: Subscription;
+  private _termsSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -72,18 +75,23 @@ export class CreateApplicationComponent {
       this.router.navigate(['/']);
     }
 
-    this.applicationForm.controls['amount'].valueChanges.subscribe(data => {
+    this._amountSubscription = this.applicationForm.controls['amount'].valueChanges.subscribe(data => {
       const amount = Number(data);
       const terms = Number(this.applicationForm.controls['terms'].value);
       const value = `$${(terms >= 1 ? amount / terms : amount).toFixed(2)}`;
       this.applicationForm.controls['monthlyPayAmount'].setValue(value);
-    })
-    this.applicationForm.controls['terms'].valueChanges.subscribe(data => {
+    });
+    this._termsSubscription = this.applicationForm.controls['terms'].valueChanges.subscribe(data => {
       const terms = Number(data);
       const amount = Number(this.applicationForm.controls['amount'].value);
       const value = `$${(terms >= 1 ? amount / terms : amount).toFixed(2)}`;
       this.applicationForm.controls['monthlyPayAmount'].setValue(value);
     });
+  }
+
+  ngOnDestroy() {
+    this._amountSubscription.unsubscribe();
+    this._termsSubscription.unsubscribe();
   }
 
   public onSave() {
