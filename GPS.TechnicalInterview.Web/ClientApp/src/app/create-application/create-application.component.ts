@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-create-application',
@@ -14,9 +15,9 @@ export class CreateApplicationComponent {
 
   public applicationForm: FormGroup;
   public statuses: Array<string> = ['New', 'Approved', 'Funded'];
-  private applicationsStorage = '/GPS.TechnicalInterview.Web/ClientApp/src/app/DB.json';
+  
 
-  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private router: Router, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private router: Router, private apiService: ApiService) {
     this.applicationForm = this.formBuilder.group({
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
@@ -51,20 +52,16 @@ export class CreateApplicationComponent {
       return;
     }
   
-    const newApplication = this.applicationForm.getRawValue(); // Get form values including disabled fields
+    const newApplication = this.applicationForm.getRawValue(); // Get form values including disabled field
   
-    // Save application in localStorage (Since Angular can't write to JSON files directly)
-    let applications = JSON.parse(localStorage.getItem('applications') || '[]');
-    applications.push(newApplication);
-    localStorage.setItem('applications', JSON.stringify(applications));
-  
-    // Show success message
-    this.snackBar.open('Created successfully.', 'Close', { duration: 3000 });
-  
-    // Redirect to dashboard after 2 seconds
-    setTimeout(() => {
-      this.router.navigate(['/dashboard']);
-    }, 2000);
+
+    this.apiService.saveApplication(newApplication).subscribe(() => {
+      this.snackBar.open('Created successfully.', 'Close', { duration: 3000 });
+
+       // Redirect to dashboard 
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+        }, 2000);
+    });
   }
-  
 }
