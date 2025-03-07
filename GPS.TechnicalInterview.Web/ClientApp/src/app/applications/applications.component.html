@@ -41,7 +41,9 @@
         <button mat-menu-item [routerLink]="['/edit-application', element.applicationNumber]">
           Edit
         </button>
-        <button mat-menu-item> Delete </button>
+        <button mat-menu-item (click)="openDeleteDialog(element.applicationNumber)">
+          Delete
+        </button>
       </mat-menu>
     </td>
   </ng-container>

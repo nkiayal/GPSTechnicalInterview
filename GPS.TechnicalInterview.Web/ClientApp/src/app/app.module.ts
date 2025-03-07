@@ -11,6 +11,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { ApplicationsComponent } from './applications/applications.component';
 import { EditApplicationComponent } from './edit-application/edit-application.component';
+import { DeleteApplicationComponent } from './delete-application/delete-application.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { EditApplicationComponent } from './edit-application/edit-application.co
     NavMenuComponent,
     ApplicationsComponent,
     CreateApplicationComponent,
-    EditApplicationComponent
+    EditApplicationComponent,
+    DeleteApplicationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,6 +31,7 @@ import { EditApplicationComponent } from './edit-application/edit-application.co
     AppRoutingModule,
     NoopAnimationsModule,
     MaterialModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

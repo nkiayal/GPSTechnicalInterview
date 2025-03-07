@@ -27,4 +27,16 @@ export class ApiService {
           })
         );
       }
+    
+      deleteApplication(applicationNumber: string): Observable<any> {
+        return this.http.get<any[]>(this.ApiUrl).pipe(
+          switchMap((applications) => {
+            const application = applications.find(app => app.applicationNumber === applicationNumber);
+            if (!application) {
+              return throwError(() => new Error('Application not found'));
+            }
+            return this.http.delete(`${this.ApiUrl}/${application.id}`);
+          })
+        );
+    }
 }

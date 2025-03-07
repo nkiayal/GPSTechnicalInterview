@@ -25,28 +25,16 @@
       "terms": "72"
     },
     {
-      "id": "14ed",
-      "firstName": "Vin",
-      "lastName": "Diesel",
-      "phoneNumber": "3456789012",
-      "email": "vdielse@gmail.com",
-      "applicationNumber": "1",
-      "status": "Funded",
-      "amount": "120000",
-      "monthlyPayAmount": "1428.57",
-      "terms": "84"
-    },
-    {
+      "id": "05b7",
       "firstName": "Bruce",
       "lastName": "Wayne",
       "phoneNumber": "0828111617",
-      "email": "batman@justiceleague.net",
-      "applicationNumber": "2",
+      "email": "batman@gotham.com",
+      "applicationNumber": "1946",
       "status": "New",
-      "amount": "100000",
+      "amount": "25000",
       "monthlyPayAmount": "416.67",
-      "terms": "240",
-      "id": "d794"
+      "terms": "60"
     }
   ]
 }
