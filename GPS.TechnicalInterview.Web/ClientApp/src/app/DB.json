@@ -6,14 +6,13 @@
       "phoneNumber": "4352631392",
       "email": "ewamana10@gps.com",
       "applicationNumber": "0043",
-      "status": "Approved",
+      "status": "Funded",
       "amount": "20000",
       "monthlyPayAmount": "333.33",
       "terms": "60",
       "id": "efb2"
     },
     {
-      "id": "087f",
       "firstName": "John",
       "lastName": "Doe",
       "phoneNumber": "1234567890",
@@ -22,7 +21,8 @@
       "status": "Approved",
       "amount": "35000",
       "monthlyPayAmount": "486.11",
-      "terms": "72"
+      "terms": "72",
+      "id": "087f"
     },
     {
       "id": "05b7",

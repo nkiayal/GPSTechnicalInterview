@@ -42,7 +42,6 @@ export class ApplicationsComponent implements OnInit {
     });
   }
 
-  // Delete application
   deleteApplication(applicationNumber: string): void {
     this.apiService.deleteApplication(applicationNumber).subscribe(() => {
       this.snackBar.open('Application deleted successfully.', 'Close', { duration: 3000 });

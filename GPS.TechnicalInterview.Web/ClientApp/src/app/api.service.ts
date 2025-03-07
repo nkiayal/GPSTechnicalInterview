@@ -4,7 +4,7 @@ import { Observable, switchMap, throwError } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class ApiService {
-    private ApiUrl = 'http://localhost:3000/applications';
+    private ApiUrl = 'http://localhost:3000/applications'; //local port for JSON server
 
     constructor(private http: HttpClient) {}
 

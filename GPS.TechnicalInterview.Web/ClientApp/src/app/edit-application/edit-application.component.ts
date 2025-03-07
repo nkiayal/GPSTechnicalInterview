@@ -26,7 +26,7 @@ export class EditApplicationComponent implements OnInit {
       lastName: [null, Validators.required],
       phoneNumber: [null, [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       email: [null, [Validators.required, Validators.email]],
-      applicationNumber: [{ value: null, disabled: true }], // Disabled since it can't be changed
+      applicationNumber: [{ value: null, disabled: true }], // Disabled since it's readonly
       status: ['New'],
       amount: [null, [Validators.required, Validators.min(1)]],
       monthlyPayAmount: [{ value: null, disabled: true }],
@@ -43,6 +43,7 @@ export class EditApplicationComponent implements OnInit {
     this.applicationForm.get('terms')?.valueChanges.subscribe(() => this.updateMonthlyPayment());
   }
 
+  // pre-fill fields with application data from DB.json
   loadApplicationData(): void {
     this.apiService.getApplications().subscribe((applications) => {
       const application = applications.find(app => app.applicationNumber === this.applicationNumber);
@@ -83,7 +84,6 @@ export class EditApplicationComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }, 2000);
       },
-      error: (err) => console.error('Error updating application:', err)
     });
   }
   

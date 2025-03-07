@@ -51,7 +51,7 @@ export class CreateApplicationComponent {
       return;
     }
   
-    const newApplication = this.applicationForm.getRawValue(); // Get form values including disabled field
+    const newApplication = this.applicationForm.getRawValue(); // Get form values
   
 
     this.apiService.saveApplication(newApplication).subscribe(() => {
