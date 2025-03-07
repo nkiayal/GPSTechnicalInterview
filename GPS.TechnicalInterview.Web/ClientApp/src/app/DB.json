@@ -1,16 +1,16 @@
 {
   "applications": [
     {
-      "id": "efb2",
       "firstName": "Elie",
       "lastName": "Wamana",
-      "phoneNumber": "4355729078",
-      "email": "eliewamana10@gmail.com",
+      "phoneNumber": "4352631392",
+      "email": "ewamana10@gps.com",
       "applicationNumber": "0043",
-      "status": "New",
+      "status": "Approved",
       "amount": "20000",
       "monthlyPayAmount": "333.33",
-      "terms": "60"
+      "terms": "60",
+      "id": "efb2"
     },
     {
       "id": "087f",
@@ -35,6 +35,18 @@
       "amount": "120000",
       "monthlyPayAmount": "1428.57",
       "terms": "84"
+    },
+    {
+      "firstName": "Bruce",
+      "lastName": "Wayne",
+      "phoneNumber": "0828111617",
+      "email": "batman@justiceleague.net",
+      "applicationNumber": "2",
+      "status": "New",
+      "amount": "100000",
+      "monthlyPayAmount": "416.67",
+      "terms": "240",
+      "id": "d794"
     }
   ]
 }
