@@ -1,0 +1,40 @@
+{
+  "applications": [
+    {
+      "firstName": "Elie",
+      "lastName": "Wamana",
+      "phoneNumber": "4352631392",
+      "email": "ewamana10@gps.com",
+      "applicationNumber": "0043",
+      "status": "Funded",
+      "amount": "20000",
+      "monthlyPayAmount": "333.33",
+      "terms": "60",
+      "id": "efb2"
+    },
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNumber": "1234567890",
+      "email": "john.doe@goldpoint.com",
+      "applicationNumber": "1000",
+      "status": "Approved",
+      "amount": "35000",
+      "monthlyPayAmount": "486.11",
+      "terms": "72",
+      "id": "087f"
+    },
+    {
+      "id": "05b7",
+      "firstName": "Bruce",
+      "lastName": "Wayne",
+      "phoneNumber": "0828111617",
+      "email": "batman@gotham.com",
+      "applicationNumber": "1946",
+      "status": "New",
+      "amount": "25000",
+      "monthlyPayAmount": "416.67",
+      "terms": "60"
+    }
+  ]
+}
