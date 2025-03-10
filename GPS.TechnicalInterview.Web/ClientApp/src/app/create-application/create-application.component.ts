@@ -52,6 +52,7 @@ export class CreateApplicationComponent {
     }
   
     const newApplication = this.applicationForm.getRawValue(); // Get form values
+    newApplication.dateApplied = new Date().toISOString(); //
   
 
     this.apiService.saveApplication(newApplication).subscribe(() => {
